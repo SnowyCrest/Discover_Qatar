@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans+Caption:wght@400;700&display=swap');
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'PT Sans Caption', sans-serif;
+}
+
+body {
+  background: #ffffff;
+  font-size: 3vh;
+  overflow-x: hidden;
+}
