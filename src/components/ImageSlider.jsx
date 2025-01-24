@@ -1,114 +1,79 @@
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
-import { IoClose } from 'react-icons/io5'; // Import the close icon
+import { createPortal } from 'react-dom';
 
-const ImageModal = ({ image, onClose, isClosing }) => {
-  const handleModalClick = (e) => {
-    e.stopPropagation(); // Prevent clicks from propagating to map
-  };
-
-  return ReactDOM.createPortal(
-    <div className={`modal-overlay ${isClosing ? 'closing' : ''}`} onClick={handleModalClick}>
-      <div className={`modal-content ${isClosing ? 'closing' : ''}`} onClick={e => e.stopPropagation()}>
-        <div className="modal-image-container">
-          <img 
-            src={image.url} 
-            alt={image.caption} 
-            className="modal-image"
-          />
-          <div className={`modal-caption ${isClosing ? 'closing' : ''}`}>
-            {image.caption}
-          </div>
-          <button className={`modal-close ${isClosing ? 'closing' : ''}`} onClick={onClose}>
-            <IoClose /> {/* Use the imported close icon */}
-          </button>
-        </div>
-      </div>
-    </div>,
-    document.body
-  );
-};
-
-const ImageSection = ({ images, speed, onImageClick, isPaused }) => {
-  return (
-    <div 
-      className="images-track"
-      style={{ 
-        animation: `swipe ${speed}ms linear infinite`,
-        animationPlayState: isPaused ? 'paused' : 'running'
-      }}
-    >
-      {images.map((image, index) => (
-        <div 
-          className="slider-item" 
-          key={`${index}-${image.url}`}
-          onClick={() => onImageClick(image)}
-        >
-          <img
-            src={image.url}
-            alt={image.caption}
-            className="slider-image"
-            loading="lazy"
-          />
-        </div>
-      ))}
-    </div>
-  );
-};
-
-const ImageSlider = ({ images }) => {
+const ImageSlider = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [isClosing, setIsClosing] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
-  const speed = 30000; // 30 seconds for one complete scroll
 
-  const handleImageClick = (image) => {
-    setIsClosing(false);
-    setSelectedImage(image);
-    document.body.style.overflow = 'hidden';
-  };
+  const images = [
+    {
+      src: "https://www.timeoutdoha.com/cloud/timeoutdoha/2021/08/17/7VUA4JvX-Souq-Waqif1-1200x800.jpg",
+      caption: "The vibrant main street of Souq Waqif during evening hours"
+    },
+    {
+      src: "https://www.discoverqatar.qa/images/souq-waqif-cafes/dq_hotel_slides/?m=nbf",
+      caption: "Traditional cafes and restaurants line the streets"
+    },
+    {
+      src: "https://visitqatar.com/adobe/dynamicmedia/deliver/dm-aid--c6847ddd-6766-4c54-b5aa-973d49d66935/07-pearls-or-pearl-shops.jpg",
+      caption: "Pearl shops displaying Qatar's rich trading history"
+    },
+    {
+      src: "https://d12eu00glpdtk2.cloudfront.net/public/images/souq-waqif-souvenirs.jpg",
+      caption: "Colorful displays of traditional souvenirs and crafts"
+    },
+    {
+      src: "https://www.researchgate.net/publication/341869103/figure/fig42/AS:981943084654623@1611124883644/Aerial-historical-photographs-of-left-Old-Doha-showing-the-Souq-Waqif-and-Msheireb.ppm",
+      caption: "Historical aerial view of Souq Waqif"
+    },
+    {
+      src: "https://maraya-tours.com/wp-content/uploads/2023/01/souqwaqifshopping.webp",
+      caption: "Traditional shopping experience in the heart of Doha"
+    },
+    {
+        src: "https://www.timeoutdoha.com/cloud/timeoutdoha/2021/08/17/7VUA4JvX-Souq-Waqif1-1200x800.jpg",
+        caption: "The vibrant main street of Souq Waqif during evening hours"
+      },
+  ];
 
   const handleClose = () => {
     setIsClosing(true);
     setTimeout(() => {
       setSelectedImage(null);
       setIsClosing(false);
-      document.body.style.overflow = 'auto';
-    }, 300); // Match this with CSS animation duration
+    }, 300);
+  };
+
+  const Modal = ({ image, onClose }) => {
+    return createPortal(
+      <div className={`modal-overlay ${isClosing ? 'closing' : ''}`} onClick={handleClose}>
+        <div className="modal-content" onClick={e => e.stopPropagation()}>
+          <button className="modal-close" onClick={handleClose}>×</button>
+          <img src={image.src} alt={image.caption} />
+          <p className="modal-caption">{image.caption}</p>
+        </div>
+      </div>,
+      document.body
+    );
   };
 
   return (
     <>
       <div className="slider-container">
-        <div 
-          className="banner-wrapper"
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
-        >
-          <div className="wrapper">
-            <ImageSection 
-              images={images} 
-              speed={speed} 
-              onImageClick={handleImageClick} 
-              isPaused={isPaused}
+        <div className="slider">
+          {images.map((image, index) => (
+            <img 
+              key={index}
+              src={`${image.src}?w=400&q=80`}
+              alt={image.caption}
+              className="slider-image"
+              onClick={() => setSelectedImage(image)}
             />
-            <ImageSection 
-              images={images} 
-              speed={speed} 
-              onImageClick={handleImageClick} 
-              isPaused={isPaused}
-            />
-          </div>
+          ))}
         </div>
       </div>
 
-      {selectedImage && (
-        <ImageModal 
-          image={selectedImage} 
-          onClose={handleClose}
-          isClosing={isClosing}
-        />
-      )}
+      {selectedImage && <Modal image={selectedImage} onClose={() => setSelectedImage(null)} />}
     </>
   );
 };
