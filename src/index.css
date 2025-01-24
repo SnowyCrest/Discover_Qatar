@@ -714,6 +714,7 @@ h1 span::before {
   height: auto;
   max-height: 90vh;
   object-fit: contain;
+  animation: slideIn 0.3s ease-out;
 }
 
 .modal-caption {
@@ -1692,4 +1693,63 @@ select {
     width: 300px;
     height: 400px;
   }
+}
+
+.modal-prev,
+.modal-next {
+  position: fixed; /* Changed from absolute to fixed */
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  border: 2px solid white;
+  border-radius: 50%;
+  color: white;
+  font-size: 3em; /* Increased from 2em */
+  cursor: pointer;
+  width: 60px; /* Increased from 40px */
+  height: 60px; /* Increased from 40px */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 100000;
+}
+
+.modal-prev {
+  left: 40px; /* Increased from 20px */
+}
+
+.modal-next {
+  right: 40px; /* Increased from 20px */
+}
+
+.modal-prev:hover,
+.modal-next:hover {
+  background: rgba(255, 255, 255, 0.9);
+  color: black;
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* Add slide animations */
+.modal-image {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(var(--slide-direction, 50px));
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.modal-image.slide-left {
+  --slide-direction: -50px;
+}
+
+.modal-image.slide-right {
+  --slide-direction: 50px;
 }
