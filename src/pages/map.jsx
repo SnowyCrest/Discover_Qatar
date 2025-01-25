@@ -13,6 +13,7 @@ import LusailInfo from '../components/LusailInfo';
 import ZubaraInfo from '../components/ZubaraInfo';
 import QNLInfo from '../components/QNLInfo';
 import DukhanInfo from '../components/DukhanInfo';
+import WeatherWidget from '../components/WeatherWidget';
 
 const Map = ({ onBackClick }) => {
   const [showSouqInfo, setShowSouqInfo] = useState(false);
@@ -266,6 +267,7 @@ const Map = ({ onBackClick }) => {
 
   return (
     <div className="page-container map-container" onClick={handleMapClick}>
+      <WeatherWidget />
       <MapBox 
         onSouqMarkerClick={handleSouqMarkerClick} 
         onMIAMarkerClick={handleMIAMarkerClick}

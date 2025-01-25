@@ -1753,3 +1753,36 @@ select {
 .modal-image.slide-right {
   --slide-direction: 50px;
 }
+
+.hero-temperature {
+  position: absolute;
+  bottom: 70px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  padding: 15px 25px; 
+  border-radius: 8px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.4em;
+  z-index: 3;
+}
+
+.hero-temperature .weather-label {
+  font-size: 0.3em;
+  opacity: 0.9;
+  margin-bottom: 2px;
+}
+
+.hero-temperature .weather-display {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero-temperature svg {
+  font-size: 1.8em; 
+}

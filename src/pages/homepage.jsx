@@ -1,4 +1,5 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
+import { WiDaySunny, WiNightClear } from 'react-icons/wi';
 import '../../src/index.css';
 import CubeSlider from '../components/CubeSlider';
 import Newsfeed from '../components/Newsfeed';
@@ -12,6 +13,9 @@ const Homepage = ({ onMapClick, onQuizClick, onFeedbackClick }) => {
     "https://www.msheireb.com/wp-content/uploads/2023/07/Sustainabiliy-scaled.jpg",
     "https://upload.wikimedia.org/wikipedia/commons/d/d5/Fisherman_on_the_Doha_Corniche_next_to_the_Islamic_Museum.jpg"
   ];
+
+  const [temperature, setTemperature] = useState(null);
+  const [isNight, setIsNight] = useState(false);
 
   useEffect(() => {
     let currentIndex = 0;
@@ -83,6 +87,33 @@ const Homepage = ({ onMapClick, onQuizClick, onFeedbackClick }) => {
     typeEffect();
   }, []);
 
+  useEffect(() => {
+    const fetchTemperature = async () => {
+      try {
+        const API_KEY = 'YOUR-OPENWEATHER-API-KEY-HERE';
+        const QATAR_LAT = 25.2854;
+        const QATAR_LON = 51.5310;
+        
+        const response = await fetch(
+          `https://api.openweathermap.org/data/2.5/weather?lat=${QATAR_LAT}&lon=${QATAR_LON}&appid=${API_KEY}&units=metric`
+        );
+        const data = await response.json();
+        setTemperature(Math.round(data.main.temp));
+
+        // Check if it's night time
+        const hour = new Date().getHours();
+        setIsNight(hour < 6 || hour >= 18);
+      } catch (error) {
+        console.error('Error fetching temperature:', error);
+      }
+    };
+
+    fetchTemperature();
+    const interval = setInterval(fetchTemperature, 600000); // Update every 10 minutes
+
+    return () => clearInterval(interval);
+  }, []);
+
   const handleMapClick = (e) => {
     e.preventDefault();
     onMapClick();
@@ -106,6 +137,17 @@ const Homepage = ({ onMapClick, onQuizClick, onFeedbackClick }) => {
             Qatar's&nbsp;<span className="typewriter"></span>
           </h1>
         </header>
+        
+        {temperature !== null && (
+          <div className="hero-temperature">
+            <span className="weather-label">Current weather in Qatar</span>
+            <div className="weather-display">
+              {isNight ? <WiNightClear /> : <WiDaySunny />}
+              {temperature}°C
+            </div>
+          </div>
+        )}
+        
         <footer className="hero-footer">
           <a className="button button-primary" onClick={e => {
             e.preventDefault();
