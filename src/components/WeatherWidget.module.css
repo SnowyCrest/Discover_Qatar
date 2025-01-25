@@ -1,25 +1,63 @@
-@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
 
-body {
-	background: #f5f5f5;
-	font-family: "Plus Jakarta Sans", sans-serif;
-	font-weight: 300;
+.weatherWidget {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  z-index: 1000;
+  width: 350px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  font-family: 'Quicksand', sans-serif;
 }
 
-header {
-	padding: 16px;
-	text-align: center;
+.weatherWidgetVisible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: all; 
 }
 
-h1,
-h2,
-h3,
-h4,
-h5 {
-	font-weight: 700;
+.toggleButton {
+  position: fixed;
+  bottom: 35px; 
+  right: 20px;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  z-index: 1001; 
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 600;
+  color: #333;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  pointer-events: all;
+  opacity: 1 !important; 
+  visibility: visible !important; 
+  pointer-events: auto !important; 
 }
 
-.card {
+.toggleButton:hover {
+  background: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Remove these styles */
+/* body, header, h1-h5 styles can be removed */
+
+/* ...rest of existing styles... */
+
+.weatherCard {
 	position: relative;
 	overflow: hidden; /* Ensure vertical scrolling */
 	height: 566px;
@@ -27,10 +65,16 @@ h5 {
 	margin: auto;
 	border: none;
 	border-radius: 32px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  transition: color 2s linear;
 }
 
-.sun,
-.moon {
+.weatherSun,
+.weatherMoon {
 	position: absolute;
 
 	left: 50%;
@@ -42,17 +86,16 @@ h5 {
 	transform: rotate(-90deg); /* Initial rotation of -90 degrees */
 }
 
-.sun {
+.weatherSun {
 	bottom: 300px;
 	background: #fceabb;
 	box-shadow: 0px 0px 40px 15px #fceabb;
 	opacity: 1;
 }
 
-.moon {
+.weatherMoon {
 	bottom: 250px;
-	background: url("https://drive.google.com/thumbnail?id=1nbYvuzW1fU3iiXoxKeMSb4TvP7rkryuy&sz=w1000");
-	background-size: contain;
+	background: #ffffff;  /* Replace image with solid color */
 	box-shadow: 0px 0px 20px 5px #ffffff;
 	opacity: 0;
 }
@@ -66,26 +109,47 @@ h5 {
 	}
 }
 
-.hours-container {
+.weatherHoursContainer {
 	position: absolute;
 	bottom: 0;
 	left: 0;
 	width: 100%;
-	overflow-x: scroll;
+	overflow-x: auto;
 	white-space: nowrap;
 	backdrop-filter: blur(20px);
+	padding: 10px 0;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.hours {
+.weatherHoursContainer::-webkit-scrollbar {
+  height: 4px; /* Reduced from 8px */
+}
+
+.weatherHoursContainer::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.weatherHoursContainer::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 2px;
+}
+
+.weatherHoursContainer::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.weatherHours {
 	display: flex;
 	padding: 8px;
 }
 
-.hours-container {
+.weatherHoursContainer {
 	scroll-behavior: smooth;
 }
 
-.hour {
+.weatherHour {
 	padding: 5px 10px;
 	cursor: pointer;
 	margin: 2px;
@@ -94,21 +158,22 @@ h5 {
 	height: 107px;
 	min-width: 80px;
 	text-align: center;
+  font-family: 'Quicksand', sans-serif;
 }
 
-.hour:hover {
-	background-color: rgba(255, 255, 255, 0.3);
+.weatherHour:hover {
+	background-color: rgba(128, 128, 128, 0.2);
 }
 
-.active {
-	background-color: rgba(255, 255, 255, 0.7);
+.weatherActive {
+	background-color: rgba(128, 128, 128, 0.3);
 }
 
-.last {
+.weatherLast {
 	min-width: 150px;
 }
 
-.background {
+.weatherBackground {
 	position: absolute;
 	width: 100%;
 	height: 100%;
@@ -117,7 +182,7 @@ h5 {
 	transition: all 2s linear;
 }
 
-.backgroundNight {
+.weatherBackgroundNight {
 	position: absolute;
 	width: 100%;
 	height: 100%;
@@ -126,19 +191,19 @@ h5 {
 	transition: all 2s linear;
 }
 
-.card,
-.card-body {
+.weatherCard,
+.weatherCardBody {
 	background: transparent !important;
 	padding: 0;
 }
 
-.rain {
+.weatherRain {
 	width: 100%;
 	height: 100%;
 	opacity: 0;
 }
 
-.drop {
+.weatherDrop {
 	background: -webkit-gradient(
 		linear,
 		0% 0%,
@@ -171,14 +236,16 @@ h5 {
 	}
 }
 
-.temperature {
+.weatherTemperature {
 	position: absolute;
 	z-index: 2;
 	right: 24px;
 	top: 24px;
 	text-align: right;
 	font-size: 40px;
-	font-weight: 600;
+	font-weight: 700;
+  transition: color 0.4s ease;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .weatherType {
@@ -190,98 +257,115 @@ h5 {
 	font-size: 16px;
 	line-height: 34px;
 	text-transform: capitalize;
+  transition: color 0.4s ease;
+  font-family: 'Quicksand', sans-serif;
 }
 
-.currentDay {
-	position: absolute;
-	z-index: 2;
-	left: 8px;
-	bottom: 144px;
-	text-align: left;
-	font-size: 16px;
-	line-height: 34px;
+.weatherCurrentDay {
+  position: absolute;
+  z-index: 2;
+  left: 24px; /* Increased from 8px */
+  bottom: 180px; /* Increased from 144px to move up */
+  text-align: left;
+  font-size: 18px; /* Slightly larger */
+  line-height: 34px;
+  font-weight: 500;
+  transition: color 0.4s ease;
+  color: #333; /* Default color for day mode */
+  font-family: 'Quicksand', sans-serif;
 }
 
-.hour span {
+/* Update night mode styles */
+.nightMode .weatherCurrentDay {
+  color: #ffffff;
+}
+
+.weatherHour span {
 	position: relative;
 	display: flex;
 	text-align: center;
-	color: black;
+	color: #333;
+  transition: color 0.4s ease;
+  font-family: 'Quicksand', sans-serif;
 }
 
-.hour .timeSpan {
+.weatherHour .weatherTimeSpan {
 	font-size: 14px;
-	font-weight: 300;
-}
-.hour .tempSpan {
-	font-size: 14px;
-	font-weight: 700;
+	font-weight: 400;
 }
 
-.hour:last-child::after {
+.weatherHour .weatherTempSpan {
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.weatherHour:last-child::after {
 	width: 300px;
 	height: 1px;
 	content: "";
 }
 
-.hour .material-symbols-rounded {
+.weatherHour .material-symbols-rounded {
 	font-size: 32px;
 	line-height: 40px;
+	display: block !important; /* Force display */
+	margin: 8px 0;
+	color: #333;
 }
 
-.hour[data-weather="sunny"] .material-symbols-rounded::after {
+.weatherHour[data-weather="sunny"] .material-symbols-rounded::after {
 	content: "sunny";
 }
 
-.hour[data-weather="clear-night"] .material-symbols-rounded::after {
+.weatherHour[data-weather="clear-night"] .material-symbols-rounded::after {
 	content: "clear_night";
 }
 
-.hour[data-weather="partly-cloudy"] .material-symbols-rounded::after {
+.weatherHour[data-weather="partly-cloudy"] .material-symbols-rounded::after {
 	content: "partly_cloudy_day";
 }
 
-.hour[data-weather="partly-cloudy-night"] .material-symbols-rounded::after {
+.weatherHour[data-weather="partly-cloudy-night"] .material-symbols-rounded::after {
 	content: "partly_cloudy_night";
 }
 
-.hour[data-weather="cloudy"] .material-symbols-rounded::after {
+.weatherHour[data-weather="cloudy"] .material-symbols-rounded::after {
 	content: "cloud";
 }
 
-.hour[data-weather="foggy"] .material-symbols-rounded::after {
+.weatherHour[data-weather="foggy"] .material-symbols-rounded::after {
 	content: "foggy";
 }
 
-.hour[data-weather="rainy"] .material-symbols-rounded::after {
+.weatherHour[data-weather="rainy"] .material-symbols-rounded::after {
 	content: "rainy";
 }
 
-.hour[data-weather="snowy"] .material-symbols-rounded::after {
+.weatherHour[data-weather="snowy"] .material-symbols-rounded::after {
 	content: "ac_unit";
 }
 
-.hour[data-weather="thunderstorm"] .material-symbols-rounded::after {
+.weatherHour[data-weather="thunderstorm"] .material-symbols-rounded::after {
 	content: "thunderstorm";
 }
 
-.card {
+.weatherCard {
 	color: black;
 	box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
 		rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
 	border: none;
 }
 
-.credit {
-	box-shadow: none;
-	border-radius: 0;
+/* Remove these styles */
+.weatherCredit {
+  /* remove this block */
 }
 
 a {
 	color: black;
 }
 
-#cloud {
+.weatherCloud {
 	position: absolute;
 	z-index: 0;
 	width: 100%;
@@ -295,7 +379,7 @@ a {
 	transition: all 2s;
 }
 
-#snow {
+.weatherSnow {
 	opacity: 0;
 	top: 0;
 	position: absolute;
@@ -306,7 +390,7 @@ a {
 	transition: all 2s;
 }
 
-#rain {
+.weatherRain {
 	width: 100%;
 	height: 100%;
 	position: absolute;
@@ -314,7 +398,7 @@ a {
 	transition: all 2s;
 }
 
-#lightning {
+.weatherLightning {
 	position: absolute;
 	top: -200px;
 	left: 0;
@@ -350,4 +434,29 @@ a {
 	29% {
 		opacity: 0;
 	}
+}
+
+.weatherIcon {
+  font-size: 24px; /* Size for React Icons */
+  transition: color 0.4s ease;
+}
+
+/* Add night mode text colors */
+.nightMode .weatherTemperature,
+.nightMode .weatherType,
+.nightMode .weatherCurrentDay,
+.nightMode .weatherHour span,
+.nightMode .weatherIcon {
+  color: #ffffff;
+}
+
+.nightMode .weatherHour span {
+  color: #ffffff;
+}
+.nightMode .weatherHour .weatherIcon {  color: #ffffff;}.nightMode .weatherHour:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.nightMode .weatherActive {
+  background-color: rgba(255, 255, 255, 0.3);
 }

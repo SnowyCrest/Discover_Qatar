@@ -1,12 +1,24 @@
 import React, { useState, useEffect } from 'react';
+import styles from './WeatherWidget.module.css';
+import classNames from 'classnames'; // Install this package: npm install classnames
+// Import React Icons
+import { WiDaySunny, WiNightClear, WiRain, WiThunderstorm, 
+         WiSnow, WiCloudy, WiDayCloudy, WiNightAltCloudy } from 'react-icons/wi';
+import { IoChevronUpOutline, IoChevronDownOutline } from 'react-icons/io5';
 
-const WeatherCard = () => {
+const WeatherWidget = () => {
   const API_KEY = 'YOUR-OPENWEATHER-API-KEY-HERE';
   const QATAR_LAT = 25.2854;
   const QATAR_LON = 51.5310;
 
   const [hoursData, setHoursData] = useState([]);
   const [currentHourData, setCurrentHourData] = useState(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const [isNightMode, setIsNightMode] = useState(false);
+
+  const toggleWidget = () => {
+    setIsVisible(!isVisible);
+  };
 
   // Fetch weather forecast
   const fetchWeatherForecast = async () => {
@@ -92,19 +104,23 @@ const WeatherCard = () => {
   const getWeatherIcon = (weather) => {
     switch (weather) {
       case 'clear-night':
-        return 'nights_stay';
+        return <WiNightClear className={styles.weatherIcon} />;
       case 'sunny':
-        return 'wb_sunny';
+        return <WiDaySunny className={styles.weatherIcon} />;
       case 'rainy':
-        return 'beach_access';
+        return <WiRain className={styles.weatherIcon} />;
       case 'thunderstorm':
-        return 'flash_on';
+        return <WiThunderstorm className={styles.weatherIcon} />;
       case 'snowy':
-        return 'ac_unit';
+        return <WiSnow className={styles.weatherIcon} />;
       case 'cloudy':
-        return 'cloud';
+        return <WiCloudy className={styles.weatherIcon} />;
+      case 'partly-cloudy':
+        return <WiDayCloudy className={styles.weatherIcon} />;
+      case 'partly-cloudy-night':
+        return <WiNightAltCloudy className={styles.weatherIcon} />;
       default:
-        return 'cloud';
+        return <WiCloudy className={styles.weatherIcon} />;
     }
   };
 
@@ -112,29 +128,35 @@ const WeatherCard = () => {
   const toggleSunMoon = (hour) => {
     const sunrise = 6; // Sunrise at 6 AM
     const sunset = 18; // Sunset at 6 PM
-    const sun = document.querySelector('.sun');
-    const moon = document.querySelector('.moon');
-    const background = document.querySelector('.background');
-    const backgroundNight = document.querySelector('.backgroundNight');
-
-    if (hour >= sunrise && hour < sunset) {
-      const dayDuration = sunset - sunrise;
-      const rotation = -90 + ((hour - sunrise) / dayDuration) * 180;
-      sun.style.transform = `rotate(${rotation}deg)`;
-      sun.style.opacity = '1';
-      moon.style.opacity = '0';
-      background.style.opacity = '1';
-      backgroundNight.style.opacity = '0';
-    } else {
-      const nightDuration = 24 - (sunset - sunrise);
-      const adjustedHour = hour < sunrise ? hour + 24 : hour;
-      const rotation = -90 + ((adjustedHour - sunset) / nightDuration) * 180;
-      moon.style.transform = `rotate(${rotation}deg)`;
-      moon.style.opacity = '1';
-      sun.style.opacity = '0';
-      background.style.opacity = '0';
-      backgroundNight.style.opacity = '1';
-    }
+    const sun = document.querySelector(`.${styles.weatherSun}`);
+    const moon = document.querySelector(`.${styles.weatherMoon}`);
+    const background = document.querySelector(`.${styles.weatherBackground}`);
+    const backgroundNight = document.querySelector(`.${styles.weatherBackgroundNight}`);
+    const isNight = hour < sunrise || hour >= sunset;
+    
+    // Add requestAnimationFrame for smoother transitions
+    requestAnimationFrame(() => {
+      setIsNightMode(isNight);
+      
+      if (!isNight) {
+        const dayDuration = sunset - sunrise;
+        const rotation = -90 + ((hour - sunrise) / dayDuration) * 180;
+        sun.style.transform = `rotate(${rotation}deg)`;
+        sun.style.opacity = '1';
+        moon.style.opacity = '0';
+        background.style.opacity = '1';
+        backgroundNight.style.opacity = '0';
+      } else {
+        const nightDuration = 24 - (sunset - sunrise);
+        const adjustedHour = hour < sunrise ? hour + 24 : hour;
+        const rotation = -90 + ((adjustedHour - sunset) / nightDuration) * 180;
+        moon.style.transform = `rotate(${rotation}deg)`;
+        moon.style.opacity = '1';
+        sun.style.opacity = '0';
+        background.style.opacity = '0';
+        backgroundNight.style.opacity = '1';
+      }
+    });
   };
 
   // Update weather and temperature display
@@ -150,9 +172,9 @@ const WeatherCard = () => {
     const snow = document.getElementById('snow');
     const cloud = document.getElementById('cloud');
     const thunderstorm = document.getElementById('thunderstorm');
-    const background = document.querySelector('.background');
-    const sun = document.querySelector('.sun');
-    const moon = document.querySelector('.moon');
+    const background = document.querySelector(`.${styles.weatherBackground}`);
+    const sun = document.querySelector(`.${styles.weatherSun}`);
+    const moon = document.querySelector(`.${styles.weatherMoon}`);
 
     rain.style.opacity = '0';
     snow.style.opacity = '0';
@@ -206,49 +228,66 @@ const WeatherCard = () => {
   }, [currentHourData]);
 
   return (
-    <div>
-      <header className="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-        <h1>Animated Weather Card</h1>
-      </header>
-      <div className="container mt-5">
-        <div className="card">
-          <div className="card-body">
-            <div className="backgroundNight"></div>
-            <div className="background"></div>
-            <div className="temperature cardInfo">
+    <>
+      <button 
+        className={styles.toggleButton}
+        onClick={toggleWidget}
+        type="button" // Add type to prevent form submission
+      >
+        {isVisible ? (
+          <>
+            <IoChevronDownOutline size={16} />
+            Hide Weather
+          </>
+        ) : (
+          <>
+            <IoChevronUpOutline size={16} />
+            Show Weather
+          </>
+        )}
+      </button>
+      <div className={classNames(styles.weatherWidget, {
+        [styles.weatherWidgetVisible]: isVisible,
+        [styles.nightMode]: isNightMode
+      })}>
+        <div className={styles.weatherCard}>
+          <div className={styles.weatherCardBody}>
+            <div className={styles.weatherBackgroundNight}></div>
+            <div className={styles.weatherBackground}></div>
+            <div className={styles.weatherTemperature}>
               <span id="temperature">21</span>°C
             </div>
-            <div className="weatherType cardInfo">
+            <div className={styles.weatherType}>
               <span id="weatherType">Sunny</span>
             </div>
-            <div className="currentDay cardInfo">
+            <div className={styles.currentDay}>
               <span id="currentDay">Today</span>
             </div>
             <div id="thunderstorm">
               <div id="lightning"></div>
             </div>
-            <div className="sun"></div>
-            <div className="moon"></div>
+            <div className={styles.weatherSun}></div>
+            <div className={styles.weatherMoon}></div>
             <div id="cloud"></div>
             <canvas id="rain"></canvas>
             <div id="snow"></div>
-            <div className="hours-container">
-              <div className="hours">
+            <div className={styles.weatherHoursContainer}>
+              <div className={styles.weatherHours}>
                 {hoursData.map((data, index) => (
                   <div
                     key={index}
-                    className="hour d-flex flex-column align-items-center"
+                    className={classNames(styles.weatherHour, {
+                      [styles.weatherActive]: currentHourData && currentHourData.hour === data.hour
+                    })}
                     data-day={data.day}
                     data-hour={data.hour}
                     data-weather={data.weather}
                     data-temp={data.temp}
                     onClick={() => setCurrentHourData(data)}
                   >
-                    <span className="timeSpan">{data.time}</span>
-                    <span className="material-symbols-rounded">
-                      {getWeatherIcon(data.weather)}
-                    </span>
-                    <span className="tempSpan">{data.temp}°C</span>
+                    <span className={styles.weatherTimeSpan}>{data.time}</span>
+                    {getWeatherIcon(data.weather)}
+                    <span className={styles.weatherTempSpan}>{data.temp}°C</span>
                   </div>
                 ))}
               </div>
@@ -256,43 +295,8 @@ const WeatherCard = () => {
           </div>
         </div>
       </div>
-      <div className="container mt-5">
-        <div className="card credit">
-          <div className="card-body">
-            <h5>Credits</h5>
-            <a href="https://codepen.io/ecemgo" target="_blank" rel="noopener noreferrer">
-              Ecem Gokdogan
-            </a>{' '}
-            -{' '}
-            <a href="https://codepen.io/ecemgo/pen/qBvBXqP" target="_blank" rel="noopener noreferrer">
-              Login Form with Snow
-            </a>
-            <br />
-            <a href="https://codepen.io/ruigewaard" target="_blank" rel="noopener noreferrer">
-              Max Ruigewaard
-            </a>{' '}
-            -{' '}
-            <a href="https://codepen.io/ruigewaard/pen/Podmea" target="_blank" rel="noopener noreferrer">
-              Rain on HTML5 Canvas
-            </a>
-            <br />
-            <a href="https://codepen.io/shivaji-bhardwaj" target="_blank" rel="noopener noreferrer">
-              Shivaji Bhardwaj
-            </a>{' '}
-            -{' '}
-            <a href="https://codepen.io/shivaji-bhardwaj/pen/zYOMRmy" target="_blank" rel="noopener noreferrer">
-              Fluffy Clouds
-            </a>
-            <br />
-            Moon by{' '}
-            <a href="https://freepik.com" target="_blank" rel="noopener noreferrer">
-              Freepik
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
+    </>
   );
 };
 
-export default WeatherCard;
+export default WeatherWidget;
