@@ -1,124 +1,173 @@
-import React, { useState, useEffect } from "react";
-import RatingCard from "../components/RatingCard";
-import "../styles/feedback.css";
+import  { useState, useEffect } from "react"
+import PropTypes from "prop-types"
+import { createClient } from "@supabase/supabase-js"
+import RatingCard from "../components/RatingCard"
+import "../styles/feedback.css"
 import "../index.css"
+
+// Initialize Supabase client
+const supabaseUrl = "https://dtxhyxdqppxhkajpumwa.supabase.co"
+const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR0eGh5eGRxcHB4aGthanB1bXdhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzc5ODM0MTYsImV4cCI6MjA1MzU1OTQxNn0.Im4LkU_MRd5ilQN1gZTFX9AY5nx28Ry201HU20E_Lro"
+const supabase = createClient(supabaseUrl, supabaseKey)
+
 const ExperienceForm = ({ onBackClick }) => {
-  const [feedbackScore, setFeedbackScore] = useState(0);
-  const [isFormVisible, setIsFormVisible] = useState(true);
-  const [landmarkTitle, setLandmarkTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [images, setImages] = useState([]);
-  const [feedbackList, setFeedbackList] = useState([]);
-  const [selectedFeedback, setSelectedFeedback] = useState(null);
-  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
-  const [newComment, setNewComment] = useState("");
+  const [feedbackScore, setFeedbackScore] = useState(0)
+  const [isFormVisible, setIsFormVisible] = useState(true)
+  const [landmarkTitle, setLandmarkTitle] = useState("")
+  const [description, setDescription] = useState("")
+  const [images, setImages] = useState([])
+  const [feedbackList, setFeedbackList] = useState([])
+  const [selectedFeedback, setSelectedFeedback] = useState(null)
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0)
+  const [newComment, setNewComment] = useState("")
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState(null)
 
   const handleBack = (e) => {
-    e.preventDefault();
-    onBackClick();
-  };
+    e.preventDefault()
+    onBackClick()
+  }
 
-  // Fetch feedback list on component mount
   useEffect(() => {
-    fetch("http://localhost:5000/api/feedback")
-      .then((response) => response.json())
-      .then((data) => setFeedbackList(data))
-      .catch((error) => console.error("Error fetching feedback:", error));
-  }, []);
+    fetchFeedback()
+  }, [])
 
-  // Handle image upload
-  const handleImageUpload = (event) => {
-    const files = event.target.files;
-    const newImages = [];
-    for (let i = 0; i < files.length; i++) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        newImages.push(reader.result);
-        if (newImages.length === files.length) {
-          setImages(newImages);
-        }
-      };
-      reader.readAsDataURL(files[i]);
+  const fetchFeedback = async () => {
+    try {
+      setIsLoading(true)
+      const { data, error } = await supabase
+        .from("feedback")
+        .select("*, comments(*)")
+        .order("created_at", { ascending: false })
+
+      if (error) throw error
+      setFeedbackList(data)
+    } catch (error) {
+      console.error("Error fetching feedback:", error)
+      setError("Failed to load feedback. Please try again later.")
+    } finally {
+      setIsLoading(false)
     }
-  };
+  }
 
-  // Handle feedback submission
-  const handleSubmit = () => {
-    const newFeedback = {
-      score: feedbackScore,
-      title: landmarkTitle,
-      description: description,
-      images: images,
-    };
+  const handleImageUpload = (event) => {
+    const files = event.target.files
+    const newImages = []
+    for (let i = 0; i < files.length; i++) {
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        newImages.push(reader.result)
+        if (newImages.length === files.length) {
+          setImages(newImages)
+        }
+      }
+      reader.readAsDataURL(files[i])
+    }
+  }
 
-    fetch("http://localhost:5000/api/feedback", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newFeedback),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setFeedbackList((prevList) => [...prevList, data.feedback]);
-        setLandmarkTitle("");
-        setDescription("");
-        setImages([]);
-        setFeedbackScore(0);
-        setIsFormVisible(false);
-      })
-      .catch((error) => console.error("Error submitting feedback:", error));
-  };
+  const handleSubmit = async () => {
+    try {
+      setIsLoading(true)
+      const newFeedback = {
+        score: feedbackScore,
+        title: landmarkTitle,
+        description: description,
+        images: images,
+      }
 
-  // Handle adding a comment
-  const handleAddComment = () => {
-    if (!newComment.trim()) return;
+      const { data, error } = await supabase.from("feedback").insert([newFeedback]).select()
 
-    const feedbackId = selectedFeedback.id;
+      if (error) throw error
 
-    // Send the new comment to the backend
-    fetch(`http://localhost:5000/api/feedback/${feedbackId}/comment`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ comment: newComment }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        // Update the comments list locally
-        const updatedFeedbackList = feedbackList.map((feedback) => {
-          if (feedback.id === feedbackId) {
-            feedback.comments = data.comments; // Update with the new comment list from the server
+      const newFeedbackWithComments = { ...data[0], comments: [] }
+      setFeedbackList((prevList) => [newFeedbackWithComments, ...prevList])
+      setLandmarkTitle("")
+      setDescription("")
+      setImages([])
+      setFeedbackScore(0)
+      setIsFormVisible(false)
+    } catch (error) {
+      console.error("Error submitting feedback:", error)
+      setError("Failed to submit feedback. Please try again.")
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const handleAddComment = async () => {
+    if (!newComment.trim()) return
+
+    const feedbackId = selectedFeedback.id
+
+    try {
+      setIsLoading(true)
+      const { data, error } = await supabase
+        .from("comments")
+        .insert([{ feedback_id: feedbackId, content: newComment }])
+        .select()
+
+      if (error) throw error
+
+      const updatedFeedbackList = feedbackList.map((feedback) => {
+        if (feedback.id === feedbackId) {
+          return {
+            ...feedback,
+            comments: [...feedback.comments, data[0]],
           }
-          return feedback;
-        });
-
-        setFeedbackList(updatedFeedbackList);
-        setNewComment(""); // Reset the new comment input field
+        }
+        return feedback
       })
-      .catch((error) => console.error("Error adding comment:", error));
-  };
 
-  // Handle image navigation in the popup
+      setFeedbackList(updatedFeedbackList)
+      setSelectedFeedback({
+        ...selectedFeedback,
+        comments: [...selectedFeedback.comments, data[0]],
+      })
+      setNewComment("")
+    } catch (error) {
+      console.error("Error adding comment:", error)
+      setError("Failed to add comment. Please try again.")
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   const handleImageNavigation = (direction) => {
-    const newIndex =
-      (selectedImageIndex + direction + selectedFeedback.images.length) %
-      selectedFeedback.images.length;
-    setSelectedImageIndex(newIndex);
-  };
+    const imageElement = document.querySelector(".carousel-image")
+    imageElement.style.opacity = "0"
+    imageElement.style.transform = `translateX(${direction * 20}px)`
 
-  // Handle closing the Rating Card popup
+    setTimeout(() => {
+      const newIndex =
+        (selectedImageIndex + direction + selectedFeedback.images.length) % selectedFeedback.images.length
+      setSelectedImageIndex(newIndex)
+
+      setTimeout(() => {
+        imageElement.style.opacity = "1"
+        imageElement.style.transform = "translateX(0)"
+      }, 50)
+    }, 300)
+  }
+
   const handleCloseForm = () => {
-    setIsFormVisible(false);
-  };
+    setIsFormVisible(false)
+  }
+
+  if (isLoading && !feedbackList.length) {
+    return <div className="loading">Loading...</div>
+  }
+
+  if (error) {
+    return <div className="error">Error: {error}</div>
+  }
 
   return (
     <div className="page-container">
       <div>
-      <a href="#" onClick={handleBack} className="back-button">← Back to Home</a>
+        <a href="#" onClick={handleBack} className="back-button">
+          ← Back to Home
+        </a>
       </div>
-      {/* Rating Card Popup */}
       {isFormVisible && (
         <div className="popup-overlay">
           <div className="popup-container">
@@ -132,77 +181,125 @@ const ExperienceForm = ({ onBackClick }) => {
               onImageUpload={handleImageUpload}
               images={images}
               onSubmit={handleSubmit}
-              onClose={handleCloseForm} // Pass the handleCloseForm to RatingCard
+              onClose={handleCloseForm}
             />
           </div>
         </div>
       )}
-
-      {/* Feedback Grid */}
       {!isFormVisible && (
-        <div className="feedback-grid">
-          {feedbackList.map((feedback) => (
-            <div
-              key={feedback.id}
-              className="feedback-item"
-              onClick={() => {
-                setSelectedFeedback(feedback);
-                setSelectedImageIndex(0); // Reset image index
-              }}
-            >
-              <p className="stars">
-                {"★".repeat(feedback.score)}
-                {"☆".repeat(5 - feedback.score)}
-              </p>
-              <p className="landmark-title">{feedback.title}</p>
-              <p className="description">{feedback.description}</p>
-              {feedback.images.length > 0 && (
-                <img
-                  src={feedback.images[0]}
-                  alt="feedback"
-                  className="feedback-image"
-                />
-              )}
-            </div>
-          ))}
-        </div>
-      )}
-
-      {/* Comment Section */}
-      {selectedFeedback && (
-        <div className="comments-section">
-          <h3>Comments:</h3>
-          <div className="comments-list">
-            {selectedFeedback.comments.map((comment, index) => (
-              <div key={index} className="comment-item">
-                {comment}
+        <div className="content-container">
+          <div className="feedback-grid">
+            {feedbackList.map((feedback) => (
+              <div
+                key={feedback.id}
+                className="feedback-item"
+                onClick={() => {
+                  setSelectedFeedback(feedback)
+                  setSelectedImageIndex(0)
+                }}
+              >
+                <p className="stars">
+                  {"★".repeat(feedback.score)}
+                  {"☆".repeat(5 - feedback.score)}
+                </p>
+                <p className="landmark-title">{feedback.title}</p>
+                <p className="description">{feedback.description}</p>
+                {feedback.images && feedback.images.length > 0 && (
+                  <img src={feedback.images[0] || "/placeholder.svg"} alt="feedback" className="feedback-image" />
+                )}
               </div>
             ))}
           </div>
-
-          <textarea
-            value={newComment}
-            onChange={(e) => setNewComment(e.target.value)}
-            placeholder="Add a comment"
-          ></textarea>
-          <button onClick={handleAddComment}>Submit Comment</button>
-
-          {/* Image Viewer */}
-          {selectedFeedback.images.length > 0 && (
-            <div className="image-popup">
-              <img
-                src={selectedFeedback.images[selectedImageIndex]}
-                alt="Feedback"
-                className="popup-image"
-              />
-              <button onClick={() => handleImageNavigation(-1)}>Previous</button>
-              <button onClick={() => handleImageNavigation(1)}>Next</button>
+          {selectedFeedback && (
+            <div className="selected-feedback">
+              <h2>{selectedFeedback.title}</h2>
+              <button className="close-button" onClick={() => setSelectedFeedback(null)}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
+              <p className="stars">
+                {"★".repeat(selectedFeedback.score)}
+                {"☆".repeat(5 - selectedFeedback.score)}
+              </p>
+              <p className="description">{selectedFeedback.description}</p>
+              {selectedFeedback.images && selectedFeedback.images.length > 0 && (
+                <div className="image-carousel">
+                  <img
+                    src={selectedFeedback.images[selectedImageIndex] || "/placeholder.svg"}
+                    alt="Feedback"
+                    className="carousel-image"
+                  />
+                  <div className="carousel-controls">
+                    <button onClick={() => handleImageNavigation(-1)} className="carousel-button prev">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                      </svg>
+                    </button>
+                    <button onClick={() => handleImageNavigation(1)} className="carousel-button next">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              )}
+              <div className="comments-section">
+                <h3>Comments:</h3>
+                <div className="comments-list">
+                  {selectedFeedback.comments.map((comment, index) => (
+                    <div key={index} className="comment-item">
+                      {comment.content}
+                    </div>
+                  ))}
+                </div>
+                <div className="add-comment">
+                  <textarea
+                    value={newComment}
+                    onChange={(e) => setNewComment(e.target.value)}
+                    placeholder="Add a comment"
+                  ></textarea>
+                  <button onClick={handleAddComment} disabled={isLoading}>
+                    {isLoading ? "Submitting..." : "Submit Comment"}
+                  </button>
+                </div>
+              </div>
             </div>
           )}
         </div>
       )}
     </div>
-  );
-};
+  )
+}
+ExperienceForm.propTypes = {
+  onBackClick: PropTypes.func.isRequired,
+}
 
-export default ExperienceForm;
+export default ExperienceForm
+
+

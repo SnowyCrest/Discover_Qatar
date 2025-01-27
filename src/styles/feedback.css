@@ -1,46 +1,267 @@
-
-/*Feedback*/
-:root {
-  --orange: hsl(25, 97%, 53%);
-  --white: hsl(0, 0%, 100%);
-  --light-grey: hsl(217, 12%, 63%);
-  --medium-grey: hsl(216, 12%, 54%);
-  --dark-blue: hsl(213, 19%, 18%);
-  --very-dark-blue: hsl(216, 12%, 8%);
+/* Feedback Grid Styles */
+.feedback-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  flex: 2;
 }
 
+.feedback-item {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
 
-/* Container for the entire page */
-main {
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
+.feedback-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.stars {
+  color: #ffc107;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.landmark-title {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.description {
+  font-size: 0.9em;
+  color: #666;
+}
+
+.feedback-image {
   width: 100%;
-  max-width: 1200px; /* Restrict the max width */
-  height: 90vh; /* Make it responsive */
-  padding: 1rem;
-  margin: auto;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-top: 10px;
+  transition: transform 0.3s ease;
 }
 
-/* Feedback Submission Form (Centered in the layout) */
+.feedback-image:hover {
+  transform: scale(1.05);
+}
+
+/* Selected Feedback Styles */
+.selected-feedback {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  max-width: 400px;
+  position: relative;
+  overflow-y: auto;
+  max-height: calc(100vh - 40px);
+}
+
+.selected-feedback h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.selected-feedback .stars {
+  margin-bottom: 15px;
+}
+
+.selected-feedback .description {
+  margin-bottom: 20px;
+}
+
+.image-carousel {
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.carousel-image {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.carousel-controls {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+  transform: translateY(-50%);
+}
+
+.carousel-button {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  font-size: 1.5rem;
+}
+
+.carousel-button:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  transform: scale(1.1);
+}
+
+.carousel-button.prev::before {
+  content: "←";
+}
+
+.carousel-button.next::before {
+  content: "→";
+}
+
+/* Comments Section Styles */
+.comments-section {
+  margin-top: 20px;
+  margin-left: 20px; /* Add margin to separate from the main content */
+  flex: 1;
+  max-width: 400px; /* Adjust as needed */
+}
+
+.comments-list {
+  max-height: 200px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+
+.comment-item {
+  background-color: #f0f2f5;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 10px;
+  transition: transform 0.2s ease;
+  word-wrap: break-word; /* Ensures long words or URLs wrap to the next line */
+  word-break: break-word; /* For better compatibility */
+  overflow-wrap: break-word; /* Modern alternative */
+}
+
+
+.comment-item:hover {
+  transform: translateX(5px);
+}
+
+.add-comment textarea {
+  width: 100%;
+  height: 80px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  resize: vertical;
+  transition: border-color 0.3s ease;
+}
+
+.add-comment textarea:focus {
+  border-color: #4caf50;
+  outline: none;
+}
+
+.add-comment button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.add-comment button:hover {
+  background-color: #45a049;
+  transform: scale(1.05);
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(0, 0, 0, 0.6);
+  border: none;
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.close-button:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  transform: rotate(90deg);
+}
+
+.close-button::before {
+  content: "×";
+  font-size: 20px;
+}
+
+/* Rating Card Styles */
 .rating-card {
-  width: 400px; /* Adjusted width */
+  width: 400px;
   max-width: 100%;
   margin: auto;
   background: var(--dark-blue);
   border-radius: 20px;
   padding: 30px;
-
+  display: flex;
   flex-direction: column;
   gap: 1rem;
-  margin: auto; /* Center the card */
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.rating-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.05) 25%,
+    transparent 50%
+  );
+  transform: rotate(45deg);
+  animation: shimmer 10s infinite linear;
+  z-index: 1;
+}
+
+.rating-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
 }
 
 .rating-card__front {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  position: relative;
+  z-index: 2;
 }
 
 .rating-card__img {
@@ -52,6 +273,11 @@ main {
   align-items: center;
   border-radius: 50%;
   margin: auto;
+  transition: transform 0.3s ease;
+}
+
+.rating-card__img:hover {
+  transform: scale(1.1);
 }
 
 .rating-card h2 {
@@ -84,9 +310,16 @@ main {
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s;
+  border: none;
 }
 
 .rating-card__ratings button:hover {
+  background: var(--orange);
+  color: var(--white);
+  transform: scale(1.1);
+}
+
+.rating-card__ratings button.active {
   background: var(--orange);
   color: var(--white);
 }
@@ -101,14 +334,15 @@ main {
   cursor: pointer;
   text-transform: uppercase;
   transition: all 0.3s;
+  border: none;
 }
 
 .rating-card__btn:hover {
   background: var(--white);
   color: var(--orange);
+  transform: translateY(-2px);
 }
 
-/* Inputs for Title and Description */
 .rating-card input,
 .rating-card textarea {
   width: 100%;
@@ -118,52 +352,127 @@ main {
   background: #f5f5f5;
   color: #333;
   font-size: 0.9rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Feedback List (Covers Entire Page) */
-.feedback-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
-  gap: 1rem;
-  width: 100%;
-  height: 100%; /* Fill the available space */
-  background: var(--very-dark-blue);
-  overflow-y: auto; /* Allow vertical scrolling */
-  padding: 1rem;
-  border-radius: 10px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+.rating-card input:focus,
+.rating-card textarea:focus {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 2px rgba(252, 118, 20, 0.2);
+  outline: none;
 }
 
-/* Feedback Item Styles */
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) rotate(45deg);
+  }
+}
+
+.rating-card {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.rating-card__front > * {
+  animation: slideIn 0.5s ease-out forwards;
+  opacity: 0;
+}
+
+.rating-card__front > *:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.rating-card__front > *:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.rating-card__front > *:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.rating-card__front > *:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.rating-card__front > *:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
 .feedback-item {
-  background: var(--dark-blue);
-  color: var(--white);
-  padding: 1rem;
-  border-radius: 10px;
-  word-wrap: break-word;
-  word-break: break-word;
-  cursor: pointer;
-  transition: transform 0.3s, box-shadow 0.3s;
+  animation: fadeIn 0.5s ease-out;
 }
 
-.feedback-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+.selected-feedback {
+  animation: slideIn 0.5s ease-out;
 }
 
-.feedback-item h3 {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
+.carousel-button:active {
+  animation: pulse 0.3s ease-in-out;
 }
 
-.feedback-item p {
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .content-container {
+    flex-direction: column;
+  }
+
+  .selected-feedback {
+    max-width: 100%;
+  }
+
+  .rating-card {
+    width: 100%;
+  }
+
+  .comments-section {
+    margin-left: 0; /* Remove margin on smaller screens */
+    max-width: 100%; /* Full width on smaller screens */
+  }
 }
 
-.feedback-item .stars {
-  color: var(--orange);
-  font-size: 1rem;
+/* Layout Adjustments */
+.content-container {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
 }
 
+.main-content {
+  flex: 2;
+}
+
+.sidebar {
+  flex: 1;
+  max-width: 400px; /* Adjust as needed */
+}
