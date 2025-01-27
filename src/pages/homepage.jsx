@@ -90,7 +90,7 @@ const Homepage = ({ onMapClick, onQuizClick, onFeedbackClick }) => {
   useEffect(() => {
     const fetchTemperature = async () => {
       try {
-        const API_KEY = 'YOUR-OPENWEATHER-API-KEY-HERE';
+        const API_KEY = '1f9a7b21e995b32405047b0b62afb676';
         const QATAR_LAT = 25.2854;
         const QATAR_LON = 51.5310;
         
@@ -166,43 +166,79 @@ const Homepage = ({ onMapClick, onQuizClick, onFeedbackClick }) => {
             color: '#000000', 
             fontSize: '4rem',
             textAlign: 'center', 
-            margin: '0rem 0 0.5rem 0' 
+            margin: '0rem 0 5rem 0' 
           }}>About Qatar</h1>
 
           <div style={{ 
             display: 'flex', 
             alignItems: 'center', 
-            justifyContent: 'center', 
-            margin: '2rem 0' 
+            justifyContent: 'space-between',
+            margin: '2rem 0 4rem 0',
+            gap: '7rem',
+            padding: '0 2rem'
           }}>
-          
-            <p style={{ 
-              color: '#575654',
-              fontSize: '1.5rem', 
-              fontWeight: "normal",
-              textAlign: 'center', 
-              margin: '0 20px' 
-            }}>
-              Qatar is a young destination with a rich heritage, that will leave you wanting more. It’s where the desert sands meet the ocean and where ancient traditions, and modern wonders live side by side.
-            </p>
-            
-
+            <div style={{ flex: '1' }}>
+              <p style={{ 
+                color: '#575654',
+                fontSize: '1.5rem', 
+                fontWeight: "normal",
+                textAlign: 'left', 
+                margin: '0'
+              }}>
+                Qatar is a young destination with a rich heritage, that will leave you wanting more. It's where the desert sands meet the ocean and where ancient traditions, and modern wonders live side by side.
+              </p>
+            </div>
+            <div style={{ flex: '1', height: '300px' }}>
+              <img 
+                src="https://visitqatar.com/adobe/dynamicmedia/deliver/dm-aid--7744fe20-d8e3-4a80-9747-94f114a98834/pearl-min-1.jpg?width=1920&preferwebp=true&quality=75" 
+                alt="Qatar Cityscape"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  borderRadius: '8px'
+                }}
+              />
+            </div>
           </div>
 
-          <p style={{ 
-            color: '#575654',
-            fontSize: '1.5rem', 
-            fontWeight: 'normal',
-            textAlign: 'center', 
-            margin: '2rem 0' 
+          <div style={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'space-between',
+            margin: '7rem 0 2rem 0',
+            gap: '7rem',
+            padding: '0 2rem'
           }}>
-            Qatar – pronounced ‘kuh-TAR’ – is located on the Arabian Peninsula, jutting into the Arabian Gulf. The first evidence of human settlement dates to the 6th millennium BCE. For centuries, Qatar was largely populated by Bedouin tribes and a few fishing villages, shaped by the rule of Arab tribes, Portuguese explorers, Ottoman leaders and the esteemed al-Thani family, whose leadership has significantly influenced the nation's heritage. Qatar’s destiny changed when oil was first discovered in the Dukhan Field in 1940, transforming its economy from pearling, fishing and trade to one of the wealthiest nations in the world.
-          </p>
+            <div style={{ flex: '1', height: '300px' }}>
+              <img 
+                src="https://visitqatar.com/adobe/dynamicmedia/deliver/dm-aid--edf9012a-8ec5-48ed-b5de-b0f754d1fd90/souq-waqif-al-wakrah-13.jpg?preferwebp=true&quality=75" 
+                alt="Traditional Souq"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  borderRadius: '8px'
+                }}
+              />
+            </div>
+            <div style={{ flex: '1' }}>
+              <p style={{ 
+                color: '#575654',
+                fontSize: '1.5rem', 
+                fontWeight: 'normal',
+                textAlign: 'right', 
+                margin: '0'
+              }}>
+                Qatar – pronounced 'kuh-TAR' – is located on the Arabian Peninsula, jutting into the Arabian Gulf. The first evidence of human settlement dates to the 6th millennium BCE. For centuries, Qatar was largely populated by Bedouin tribes and a few fishing villages, shaped by the rule of Arab tribes, Portuguese explorers, Ottoman leaders and the esteemed al-Thani family, whose leadership has significantly influenced the nation's heritage. Qatar's destiny changed when oil was first discovered in the Dukhan Field in 1940, transforming its economy from pearling, fishing and trade to one of the wealthiest nations in the world.
+              </p>
+            </div>
+          </div>
 
           <h2 style={{ 
             color: '#000000', 
             textAlign: 'center', 
-            margin: '1rem 0 0.5rem 0' 
+            margin: '6rem 0 0.5rem 0' 
           }}> 
             What's happening in Qatar 
           </h2>
@@ -218,7 +254,7 @@ const Homepage = ({ onMapClick, onQuizClick, onFeedbackClick }) => {
               textAlign: 'center', 
               margin: '0 20px' 
             }}>
-              Stay updated with the latest events and news from Qatar.
+              Stay updated with the latest events and news of Qatar.
             </p>
             
           </div>
