@@ -104,8 +104,8 @@
   background-color: rgba(0, 0, 0, 0.6);
   color: white;
   border: none;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   cursor: pointer;
   display: flex;
@@ -212,7 +212,7 @@
 }
 
 .close-button::before {
-  content: "×";
+  content: "";
   font-size: 20px;
 }
 

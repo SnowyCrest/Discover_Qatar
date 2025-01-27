@@ -250,7 +250,7 @@ const ExperienceForm = ({ onBackClick }) => {
                         strokeLinecap="round"
                         strokeLinejoin="round"
                       >
-                        <polyline points="15 18 9 12 15 6"></polyline>
+
                       </svg>
                     </button>
                     <button onClick={() => handleImageNavigation(1)} className="carousel-button next">
@@ -263,7 +263,7 @@ const ExperienceForm = ({ onBackClick }) => {
                         strokeLinecap="round"
                         strokeLinejoin="round"
                       >
-                        <polyline points="9 18 15 12 9 6"></polyline>
+
                       </svg>
                     </button>
                   </div>
