@@ -6,8 +6,8 @@ import "../styles/feedback.css"
 import "../index.css"
 
 // Initialize Supabase client
-const supabaseUrl = "https://dtxhyxdqppxhkajpumwa.supabase.co"
-const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR0eGh5eGRxcHB4aGthanB1bXdhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzc5ODM0MTYsImV4cCI6MjA1MzU1OTQxNn0.Im4LkU_MRd5ilQN1gZTFX9AY5nx28Ry201HU20E_Lro"
+const supabaseUrl = "YOUR-SUPABASE-URL-HERE"
+const supabaseKey = "YOUR-SUPABASE-KEY-HERE"
 const supabase = createClient(supabaseUrl, supabaseKey)
 
 const ExperienceForm = ({ onBackClick }) => {
@@ -154,6 +154,32 @@ const ExperienceForm = ({ onBackClick }) => {
   }
 
   if (isLoading && !feedbackList.length) {
+    return (
+      <div className="page-container feedback-page">
+        <div className="popup-overlay">
+          <div className="popup-container">
+            <div className="rating-card skeleton">
+              <div className="rating-card__front">
+                <div className="skeleton-img pulse"></div>
+                <div className="skeleton-title pulse"></div>
+                <div className="skeleton-text pulse"></div>
+                <div className="skeleton-ratings">
+                  {[1, 2, 3, 4, 5].map(n => (
+                    <div key={n} className="skeleton-circle pulse"></div>
+                  ))}
+                </div>
+                <div className="skeleton-input pulse"></div>
+                <div className="skeleton-textarea pulse"></div>
+                <div className="skeleton-button pulse"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (isLoading && !feedbackList.length) {
     return <div className="loading">Loading...</div>
   }
 
@@ -162,7 +188,7 @@ const ExperienceForm = ({ onBackClick }) => {
   }
 
   return (
-    <div className="page-container">
+    <div className="page-container feedback-page">
       <div>
         <a href="#" onClick={handleBack} className="back-button">
           ← Back to Home

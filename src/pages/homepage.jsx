@@ -90,7 +90,7 @@ const Homepage = ({ onMapClick, onQuizClick, onFeedbackClick }) => {
   useEffect(() => {
     const fetchTemperature = async () => {
       try {
-        const API_KEY = '1f9a7b21e995b32405047b0b62afb676';
+        const API_KEY = 'YOUR-OPENWEATHER-API-KEY-HERE';
         const QATAR_LAT = 25.2854;
         const QATAR_LON = 51.5310;
         

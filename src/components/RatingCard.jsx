@@ -54,7 +54,7 @@ const RatingCard = ({
           {[1, 2, 3, 4, 5].map((score) => (
             <button
               key={score}
-              className={feedbackScore === score ? "active" : ""}
+              className={feedbackScore === score ? "active" : ""} 
               onClick={() => handleScoreChange(score)}
             >
               {score}
