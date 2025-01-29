@@ -9,7 +9,7 @@
 
 .feedback-page {
   min-height: 100vh;
-  background-image: url('https://images.unsplash.com/photo-1517425911887-f515b51e6f26?q=80&w=1924&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+  background-image: url('https://images.unsplash.com/photo-1552930210-3afd6f17af84?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -253,7 +253,9 @@
   width: 400px;
   max-width: 100%;
   margin: auto;
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.7) !important;
+  backdrop-filter: blur(6px);
+  color: #333 !important;
   border: 1px solid var(--light-violet);
   border-radius: 20px;
   padding: 30px;
@@ -264,8 +266,6 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
   overflow: hidden;
-  background: #000 !important;
-  color: #fff !important;
 }
 
 .feedback-page .rating-card::before {
@@ -316,17 +316,15 @@
 }
 
 .feedback-page .rating-card h2 {
-  color: var(--white);
+  color: #333 !important;
   font-size: 1.5rem;
   font-weight: bold;
   text-align: center;
-  color: #fff !important;
 }
 
 .feedback-page .rating-card p {
-  color: var(--light-grey);
+  color: #555 !important;
   text-align: center;
-  color: #fff !important;
 }
 
 .feedback-page .rating-card__ratings {
@@ -403,14 +401,14 @@
 .feedback-page .skeleton-img {
   width: 50px;
   height: 50px;
-  background: #3e454d;
+  background: #c9c9c9;
   border-radius: 50%;
   margin: auto;
 }
 
 .feedback-page .skeleton-title {
   height: 32px;
-  background: #3e454d;
+  background: #c9c9c9;
   border-radius: 4px;
   margin: 20px auto;
   width: 60%;
@@ -418,7 +416,7 @@
 
 .feedback-page .skeleton-text {
   height: 60px;
-  background: #3e454d;
+  background: #c9c9c9;
   border-radius: 4px;
   margin: 20px auto;
   width: 100%;
@@ -433,13 +431,13 @@
 .feedback-page .skeleton-circle {
   width: 40px;
   height: 40px;
-  background: #3e454d;
+  background: #c9c9c9;
   border-radius: 50%;
 }
 
 .feedback-page .skeleton-input {
   height: 40px;
-  background: #3e454d;
+  background: #c9c9c9;
   border-radius: 4px;
   margin: 20px 0;
   width: 100%;
@@ -447,7 +445,7 @@
 
 .feedback-page .skeleton-textarea {
   height: 100px;
-  background: #3e454d;
+  background: #c9c9c9;
   border-radius: 4px;
   margin: 20px 0;
   width: 100%;
@@ -455,7 +453,7 @@
 
 .feedback-page .skeleton-button {
   height: 40px;
-  background: #3e454d;
+  background: #c9c9c9;
   border-radius: 20px;
   margin: 20px auto;
   width: 100%;
