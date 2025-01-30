@@ -277,8 +277,8 @@
   height: 200%;
   background: linear-gradient(
     to bottom right,
-    rgba(255, 255, 255, 0.2) 0%,
-    rgba(255, 255, 255, 0.1) 25%,
+    rgba(255, 255, 255, 0.68) 0%,
+    rgba(255, 255, 255, 0.59) 25%,
     transparent 50%
   ) !important;
   transform: rotate(45deg);
