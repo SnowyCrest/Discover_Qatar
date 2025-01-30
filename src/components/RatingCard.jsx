@@ -42,12 +42,11 @@ const RatingCard = ({
           <div className="rating-card__img">
             <img src="https://rvs-interactive-rating-component.vercel.app/images/icon-star.svg" alt="Star icon" />
           </div>
-          <h2>How did we do?</h2>
+          <h2>How was your visit?</h2>
         </div>
         <div className="rating-card__content">
           <p>
-            Please let us know how we did with your support request. All feedback is appreciated to help us improve our
-            offering!
+            Tell others about your experience when exploring Qatar!
           </p>
         </div>
         <div className={`rating-card__ratings ${isAnimating ? "animate" : ""}`}>
