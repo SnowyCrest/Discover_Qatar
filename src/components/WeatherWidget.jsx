@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import styles from './WeatherWidget.module.css';
-import classNames from 'classnames'; // Install this package: npm install classnames
-// Import React Icons
+import classNames from 'classnames';
 import { WiDaySunny, WiNightClear, WiRain, WiThunderstorm, 
          WiSnow, WiCloudy, WiDayCloudy, WiNightAltCloudy } from 'react-icons/wi';
 import { IoChevronUpOutline, IoChevronDownOutline } from 'react-icons/io5';
 
 const WeatherWidget = () => {
-  const API_KEY = 'YOUR-OPENWEATHER-API-KEY-HERE';
+  const API_KEY = '1f9a7b21e995b32405047b0b62afb676';
   const QATAR_LAT = 25.2854;
   const QATAR_LON = 51.5310;
 

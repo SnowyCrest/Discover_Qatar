@@ -133,15 +133,15 @@
   background-color: var(--violet);
   color: white;
   border: none;
-  width: 30px;
-  height: 30px;
+  width: 24px; /* reduced from 30px */
+  height: 24px; /* reduced from 30px */
   border-radius: 50%;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: background-color 0.3s ease, transform 0.3s ease;
-  font-size: 1.5rem;
+  font-size: 1rem; /* reduced from 1.5rem */
 }
 
 .feedback-page .carousel-button:hover {
@@ -151,10 +151,12 @@
 
 .feedback-page .carousel-button.prev::before {
   content: "←";
+  font-size: 14px; /* added font size for arrow */
 }
 
 .feedback-page .carousel-button.next::before {
   content: "→";
+  font-size: 14px; /* added font size for arrow */
 }
 
 /* Comments Section Styles */
@@ -356,8 +358,8 @@
 }
 
 .feedback-page .rating-card__btn {
-  background: var(--orange);
-  color: var(--white);
+  background: var(--white);
+  color: var(--gold);
   padding: 10px;
   border-radius: 20px;
   font-size: 1rem;
@@ -369,8 +371,8 @@
 }
 
 .feedback-page .rating-card__btn:hover {
-  background: var(--white);
-  color: var(--orange);
+  background: var(--gold);
+  color: var(--white);
   transform: translateY(-2px);
 }
 
@@ -398,82 +400,56 @@
   pointer-events: none;
 }
 
+.feedback-page [class^="skeleton-"] {
+  background: #fff;
+  border-radius: 4px;
+  margin: 10px auto;
+  opacity: 0.6;
+  animation: pulse-animation 1.5s infinite;
+}
+
 .feedback-page .skeleton-img {
   width: 50px;
   height: 50px;
-  background: #c9c9c9;
   border-radius: 50%;
-  margin: auto;
 }
 
 .feedback-page .skeleton-title {
   height: 32px;
-  background: #c9c9c9;
-  border-radius: 4px;
-  margin: 20px auto;
   width: 60%;
 }
 
 .feedback-page .skeleton-text {
   height: 60px;
-  background: #c9c9c9;
-  border-radius: 4px;
-  margin: 20px auto;
   width: 100%;
 }
 
 .feedback-page .skeleton-ratings {
   display: flex;
   justify-content: space-between;
-  margin: 20px 0;
+  gap: 10px;
 }
 
 .feedback-page .skeleton-circle {
   width: 40px;
   height: 40px;
-  background: #c9c9c9;
   border-radius: 50%;
 }
 
-.feedback-page .skeleton-input {
+.feedback-page .skeleton-input,
+.feedback-page .skeleton-button {
   height: 40px;
-  background: #c9c9c9;
-  border-radius: 4px;
-  margin: 20px 0;
   width: 100%;
 }
 
 .feedback-page .skeleton-textarea {
   height: 100px;
-  background: #c9c9c9;
-  border-radius: 4px;
-  margin: 20px 0;
   width: 100%;
-}
-
-.feedback-page .skeleton-button {
-  height: 40px;
-  background: #c9c9c9;
-  border-radius: 20px;
-  margin: 20px auto;
-  width: 100%;
-}
-
-.feedback-page .pulse {
-  animation: pulse-animation 1.5s infinite;
-  opacity: 0.6;
 }
 
 @keyframes pulse-animation {
-  0% {
-    opacity: 0.6;
-  }
-  50% {
-    opacity: 0.3;
-  }
-  100% {
-    opacity: 0.6;
-  }
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 0.3; }
 }
 
 /* Animations */

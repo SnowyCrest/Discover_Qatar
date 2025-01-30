@@ -6,8 +6,8 @@ import "../styles/feedback.css"
 import "../index.css"
 
 // Initialize Supabase client
-const supabaseUrl = "YOUR-SUPABASE-KEY-HERE"
-const supabaseKey = "YOUR-SUPABASE-URL-HERE"
+const supabaseUrl = "YOUR-SUPABASE-URL-HERE"
+const supabaseKey = "YOUR-SUPABASE-KEY-HERE"
 const supabase = createClient(supabaseUrl, supabaseKey)
 
 const ExperienceForm = ({ onBackClick }) => {
@@ -327,5 +327,4 @@ ExperienceForm.propTypes = {
 }
 
 export default ExperienceForm
-
 
