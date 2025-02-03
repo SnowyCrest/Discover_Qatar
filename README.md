@@ -1,8 +1,7 @@
 ![Frame 9](https://github.com/user-attachments/assets/7f79a26c-cf70-4c8c-8aaa-43cf1d422c29)
 
-![GitHub License](https://img.shields.io/github/license/SnowyCrest/Discover_Qatar)
-![GitHub repo size](https://img.shields.io/github/repo-size/SnowyCrest/Discover_Qatar)
-![Website](https://img.shields.io/website?url=https%3A%2F%2Fhttps://discover-qatar.vercel.app/)
+![GitHub repo size](https://img.shields.io/github/repo-size/SnowyCrest/Discover_Qatar) 
+![Website](https://img.shields.io/website?url=https%3A%2F%2Fdiscover-qatar.vercel.app/)
 
 # 🧭 Discover Qatar
 Tourism & Travel website built with React JSX and Vite. Submission for the "Timeless Qatar" coding competition.
