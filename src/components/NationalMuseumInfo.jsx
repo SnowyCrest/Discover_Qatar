@@ -1,7 +1,7 @@
 import React from 'react';
 import ImageSlider from './ImageSlider';
 import { IoArrowBack } from 'react-icons/io5';
-import NMoQ_Logo from '../assets/NMoQ_Logo.png';
+import NMoQ_Logo from '../assets/NMoQ_logo.png';
 
 const NationalMuseumImages = [
   {
