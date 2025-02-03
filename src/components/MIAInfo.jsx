@@ -1,7 +1,7 @@
 import React from 'react';
 import ImageSlider from './ImageSlider';
 import { IoArrowBack } from 'react-icons/io5';
-import MiaLogo from '../assets/MiaLogo.png'
+import MiaLogo from '../assets/MIALogo.png'
 
 const MIAImages = [
   {
