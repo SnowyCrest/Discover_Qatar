@@ -6,7 +6,7 @@ import { WiDaySunny, WiNightClear, WiRain, WiThunderstorm,
 import { IoChevronUpOutline, IoChevronDownOutline } from 'react-icons/io5';
 
 const WeatherWidget = () => {
-  const API_KEY = '1f9a7b21e995b32405047b0b62afb676';
+  const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
   const QATAR_LAT = 25.2854;
   const QATAR_LON = 51.5310;
 

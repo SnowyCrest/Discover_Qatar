@@ -6,9 +6,9 @@ import "../styles/feedback.css"
 import "../index.css"
 
 // Initialize Supabase client
-const supabaseUrl = "YOUR-SUPABASE-URL-HERE"
-const supabaseKey = "YOUR-SUPABASE-KEY-HERE"
-const supabase = createClient(supabaseUrl, supabaseKey)
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 const ExperienceForm = ({ onBackClick }) => {
   const [feedbackScore, setFeedbackScore] = useState(0)

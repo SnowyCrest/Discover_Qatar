@@ -35,7 +35,7 @@ const MapBox = ({
   const [infoBoxVisible, setInfoBoxVisible] = useState(false);
 
   useEffect(() => {
-    mapboxgl.accessToken = 'YOUR-MAPBOX-TOKEN-HERE';
+    mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
 
     try {
       mapRef.current = new mapboxgl.Map({
