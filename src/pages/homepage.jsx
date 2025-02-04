@@ -3,7 +3,7 @@ import { WiDaySunny, WiNightClear } from 'react-icons/wi';
 import '../../src/index.css';
 import CubeSlider from '../components/CubeSlider';
 import Newsfeed from '../components/Newsfeed';
-
+import Card from "../components/card-hover-effect";
 const Homepage = ({ onMapClick, onQuizClick, onFeedbackClick }) => {
   const images = [
     "https://m.thepeninsulaqatar.com/get/maximage/20240401_1711968532-48.jpg?1711968532",
@@ -189,17 +189,11 @@ const Homepage = ({ onMapClick, onQuizClick, onFeedbackClick }) => {
               </p>
             </div>
             <div style={{ flex: '1', height: '300px' }}>
-              <img 
-                src="https://visitqatar.com/adobe/dynamicmedia/deliver/dm-aid--7744fe20-d8e3-4a80-9747-94f114a98834/pearl-min-1.jpg?width=1920&preferwebp=true&quality=75" 
-                alt="Qatar Cityscape"
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  borderRadius: '8px'
-                }}
-              />
-            </div>
+  <Card 
+    imageUrl="https://visitqatar.com/adobe/dynamicmedia/deliver/dm-aid--7744fe20-d8e3-4a80-9747-94f114a98834/pearl-min-1.jpg?width=1920&preferwebp=true" 
+  />
+</div>
+
           </div>
 
           <div style={{ 
@@ -210,16 +204,10 @@ const Homepage = ({ onMapClick, onQuizClick, onFeedbackClick }) => {
             gap: '7rem',
             padding: '0 2rem'
           }}>
-            <div style={{ flex: '1', height: '300px' }}>
-              <img 
-                src="https://visitqatar.com/adobe/dynamicmedia/deliver/dm-aid--edf9012a-8ec5-48ed-b5de-b0f754d1fd90/souq-waqif-al-wakrah-13.jpg?preferwebp=true&quality=75" 
-                alt="Traditional Souq"
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  borderRadius: '8px'
-                }}
+            <div style={{ flex: '1', height: '400px' }}>
+              <Card 
+                imageUrl="https://visitqatar.com/adobe/dynamicmedia/deliver/dm-aid--edf9012a-8ec5-48ed-b5de-b0f754d1fd90/souq-waqif-al-wakrah-13.jpg?preferwebp=true&quality=75" 
+               
               />
             </div>
             <div style={{ flex: '1' }}>
