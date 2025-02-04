@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import '../index.css';
 import '../styles/quiz.css';
 
@@ -435,6 +436,15 @@ const Quiz = ({ onBackClick }) => {
   }, [selectedCategory]);
 
   useEffect(() => {
+    const shuffleAnswers = () => {
+      const currentQuestion = questions[currentQuestionIndex];
+      if (currentQuestion) {
+        const allAnswers = [...currentQuestion.incorrect, currentQuestion.correct];
+        const shuffled = allAnswers.sort(() => Math.random() - 0.5);
+        setShuffledAnswers(shuffled);
+      }
+    };
+
     if (questions.length > 0) {
       shuffleAnswers();
     }
@@ -448,14 +458,7 @@ const Quiz = ({ onBackClick }) => {
     setIsQuizEnded(false);
   };
 
-  const shuffleAnswers = () => {
-    const currentQuestion = questions[currentQuestionIndex];
-    if (currentQuestion) {
-      const allAnswers = [...currentQuestion.incorrect, currentQuestion.correct];
-      const shuffled = allAnswers.sort(() => Math.random() - 0.5);
-      setShuffledAnswers(shuffled);
-    }
-  };
+ 
 
   useEffect(() => {
     if (isQuizStarted && timeLeft > 0) {
@@ -535,7 +538,8 @@ const Quiz = ({ onBackClick }) => {
 
   return (
     <div className="quiz-container" style={{
-      backgroundImage: `url(${backgroundImage})`,
+      backgroundImage: `url(${backgroundImage})`
+      ,
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat',
@@ -547,10 +551,11 @@ const Quiz = ({ onBackClick }) => {
       justifyContent: 'center', // Center content vertically
       alignItems: 'center' // Center content horizontally
     }}>
-      <div className="content-wrapper fade-in">
         <nav className="map-nav">
           <a href="#" onClick={handleBack} className="back-button">← Back to Home</a>
         </nav>
+      <div className="content-wrapper fade-in">
+      
         {!isQuizStarted && !isQuizEnded ? (
           <div className="start-screen fade-in">
             <h1 className="heading">Test your knowledge of Qatar</h1>
@@ -624,7 +629,7 @@ const Quiz = ({ onBackClick }) => {
               ))}
             </div>
             {showCorrectAnswer && (
-              <div className="explanation fade-in">
+              <div className="explanation-fade-in">
                 <p>{currentExplanation}</p>
               </div>
             )}
@@ -639,6 +644,9 @@ const Quiz = ({ onBackClick }) => {
       </div>
     </div>
   );
+};
+Quiz.propTypes = {
+  onBackClick: PropTypes.func.isRequired,
 };
 
 export default Quiz;

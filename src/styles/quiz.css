@@ -34,7 +34,9 @@
   align-items: center;
   gap: 20px;
 }
-
+.quiz.fade-in{
+  overflow: auto;
+}
 .answer-wrapper {
   width: 100%;
   display: flex;
