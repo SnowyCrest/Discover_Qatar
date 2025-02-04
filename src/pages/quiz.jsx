@@ -629,7 +629,7 @@ const Quiz = ({ onBackClick }) => {
               ))}
             </div>
             {showCorrectAnswer && (
-              <div className="explanation fade-in">
+              <div className="explanation-fade-in">
                 <p>{currentExplanation}</p>
               </div>
             )}
