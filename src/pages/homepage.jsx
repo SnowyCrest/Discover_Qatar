@@ -1,9 +1,28 @@
 import React, { useEffect, useCallback, useState } from 'react';
 import { WiDaySunny, WiNightClear } from 'react-icons/wi';
+import { motion } from 'framer-motion';
+import { useInView } from 'framer-motion';
 import '../../src/index.css';
 import CubeSlider from '../components/CubeSlider';
 import Newsfeed from '../components/Newsfeed';
 import Card from "../components/card-hover-effect";
+
+const FadeInWhenVisible = ({ children }) => {
+  const ref = React.useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 50 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+      transition={{ duration: 0.8 }}
+    >
+      {children}
+    </motion.div>
+  );
+};
+
 const Homepage = ({ onMapClick, onQuizClick, onFeedbackClick }) => {
   const images = [
     "https://m.thepeninsulaqatar.com/get/maximage/20240401_1711968532-48.jpg?1711968532",
@@ -162,103 +181,86 @@ const Homepage = ({ onMapClick, onQuizClick, onFeedbackClick }) => {
         </footer>
       </section>
       <article>
-      <h1 style={{ 
-  color: '#000000', 
-  fontSize: '4rem',
-  textAlign: 'center', 
-  margin: '0rem 0 5rem 0' 
-}}>About Qatar</h1>
+        <FadeInWhenVisible>
+          <h1 style={{ 
+            color: '#000000', 
+            fontSize: '4rem',
+            textAlign: 'center', 
+            margin: '0rem 0 5rem 0' 
+          }}>About Qatar</h1>
+        </FadeInWhenVisible>
 
-<div style={{ 
-  display: 'flex', 
-  flexDirection: 'row', 
-  flexWrap: 'wrap', 
-  alignItems: 'center',
-  justifyContent: 'center',
-  gap: '20px', 
-  maxWidth: '100%',
-  padding: '20px'
-}}>
-
-  <div style={{ 
-    flex: '1', 
-    minWidth: '300px',
-    order: 1,
-    '@media (max-width: 768px)': {
-      order: 2,
-      width: '100%'
-    }
-  }}>
-    <p style={{ 
-      color: '#575654',
-      fontSize: 'clamp(1rem, 2vw, 1.5rem)', 
-      fontWeight: 'normal',
-      textAlign: 'right', 
-      margin: '0',
-      lineHeight: '1.5',
-      '@media (max-width: 768px)': {
-        textAlign: 'center'
-      }
-    }}>
-      Qatar is a young destination with a rich heritage, that will leave you wanting more. It's where the desert sands meet the ocean and where ancient traditions, and modern wonders live side by side.
-    </p>
-  </div>
-
-  <div style={{ 
-    flex: '1', 
-    height: '300px',
-    order: 2,
-    '@media (max-width: 768px)': {
-      order: 1,
-      width: '100%'
-    }
-  }}>
-    <Card 
-      imageUrl="https://visitqatar.com/adobe/dynamicmedia/deliver/dm-aid--7744fe20-d8e3-4a80-9747-94f114a98834/pearl-min-1.jpg?width=1920&preferwebp=true" 
-    />
-  </div>
-
-</div>
-
-
-
+        <FadeInWhenVisible>
           <div style={{ 
-  display: 'flex', 
-  flexWrap: 'wrap', // Allows items to wrap on smaller screens
-  alignItems: 'center',
-  justifyContent: 'center',
-  gap: '20px', // Adds spacing between elements
-  maxWidth: '100%',
-  padding: '20px'
-}}>
-  <div style={{ 
-    flex: '1', 
-    minWidth: '300px', // Prevents the card from becoming too small
-    height: '400px' 
-  }}>
-    <Card 
-      imageUrl="https://visitqatar.com/adobe/dynamicmedia/deliver/dm-aid--edf9012a-8ec5-48ed-b5de-b0f754d1fd90/souq-waqif-al-wakrah-13.jpg?preferwebp=true&quality=75" 
-    />
-  </div>
-  
-  <div style={{ 
-    flex: '1', 
-    minWidth: '300px', // Ensures text remains readable
-  }}>
-    <p style={{ 
-      color: '#575654',
-      fontSize: 'clamp(1rem, 2vw, 1.5rem)', // Responsive font size
-      fontWeight: 'normal',
-      textAlign: 'right', 
-      margin: '0',
-      lineHeight: '1.5'
-    }}>
-      Qatar – pronounced 'kuh-TAR' – is located on the Arabian Peninsula, jutting into the Arabian Gulf. The first evidence of human settlement dates to the 6th millennium BCE. For centuries, Qatar was largely populated by Bedouin tribes and a few fishing villages, shaped by the rule of Arab tribes, Portuguese explorers, Ottoman leaders and the esteemed al-Thani family, whose leadership has significantly influenced the nation's heritage. Qatar's destiny changed when oil was first discovered in the Dukhan Field in 1940, transforming its economy from pearling, fishing and trade to one of the wealthiest nations in the world.
-    </p>
-  </div>
-</div>
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            gap: '2rem',
+            padding: '2rem',
+            maxWidth: '1400px',
+            margin: '0 auto',
+            alignItems: 'stretch'
+          }}>
+            <div style={{ 
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              gap: '1rem'
+            }}>
+              <p style={{ 
+                color: '#575654',
+                fontSize: 'clamp(1rem, 2vw, 1.5rem)', 
+                fontWeight: 'normal',
+                lineHeight: '1.5',
+              }}>
+                Qatar is a young destination with a rich heritage, that will leave you wanting more. It's where the desert sands meet the ocean and where ancient traditions, and modern wonders live side by side.
+              </p>
+            </div>
 
+            <div style={{ 
+              aspectRatio: '4/3',
+              minHeight: '300px',
+            }}>
+              <Card imageUrl="https://visitqatar.com/adobe/dynamicmedia/deliver/dm-aid--7744fe20-d8e3-4a80-9747-94f114a98834/pearl-min-1.jpg?width=1920&preferwebp=true" />
+            </div>
+          </div>
+        </FadeInWhenVisible>
 
+        <FadeInWhenVisible>
+          <div style={{ 
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            gap: '2rem',
+            padding: '2rem',
+            maxWidth: '1400px',
+            margin: '0 auto',
+            alignItems: 'stretch'
+          }}>
+            <div style={{ 
+              aspectRatio: '4/3',
+              minHeight: '300px',
+            }}>
+              <Card imageUrl="https://visitqatar.com/adobe/dynamicmedia/deliver/dm-aid--edf9012a-8ec5-48ed-b5de-b0f754d1fd90/souq-waqif-al-wakrah-13.jpg?preferwebp=true&quality=75" />
+            </div>
+            
+            <div style={{ 
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              gap: '1rem'
+            }}>
+              <p style={{ 
+                color: '#575654',
+                fontSize: 'clamp(1rem, 2vw, 1.5rem)',
+                fontWeight: 'normal',
+                lineHeight: '1.5',
+              }}>
+                Qatar – pronounced 'kuh-TAR' – is located on the Arabian Peninsula, jutting into the Arabian Gulf. The first evidence of human settlement dates to the 6th millennium BCE. For centuries, Qatar was largely populated by Bedouin tribes and a few fishing villages, shaped by the rule of Arab tribes, Portuguese explorers, Ottoman leaders and the esteemed al-Thani family, whose leadership has significantly influenced the nation's heritage. Qatar's destiny changed when oil was first discovered in the Dukhan Field in 1940, transforming its economy from pearling, fishing and trade to one of the wealthiest nations in the world.
+              </p>
+            </div>
+          </div>
+        </FadeInWhenVisible>
+
+        <FadeInWhenVisible>
           <h2 style={{ 
             color: '#000000', 
             textAlign: 'center', 
@@ -272,7 +274,6 @@ const Homepage = ({ onMapClick, onQuizClick, onFeedbackClick }) => {
             justifyContent: 'center', 
             margin: '2rem 0' 
           }}>
-                      
             <p style={{ 
               color: '#000000',
               textAlign: 'center', 
@@ -280,11 +281,17 @@ const Homepage = ({ onMapClick, onQuizClick, onFeedbackClick }) => {
             }}>
               Stay updated with the latest events and news of Qatar.
             </p>
-            
           </div>
+        </FadeInWhenVisible>
+
+        <FadeInWhenVisible>
+          <Newsfeed />
+        </FadeInWhenVisible>
+
+        <FadeInWhenVisible>
+          <CubeSlider />
+        </FadeInWhenVisible>
       </article>
-      <Newsfeed />
-      <CubeSlider />
     </div>
   );
 };

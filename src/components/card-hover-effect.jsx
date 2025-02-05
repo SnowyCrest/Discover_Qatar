@@ -87,8 +87,8 @@ const Card = ({
     backgroundImage: `url(${imageUrl})`,
     backgroundSize: "cover", 
     backgroundPosition: "center",
-    width: imageOrientation === "landscape" ? "450px" : "350px", // Increased size
-    height: imageOrientation === "landscape" ? "300px" : "450px", // Increased size
+    width: "100%", // Changed to be responsive
+    height: "100%", // Changed to be responsive
   };
   
 
