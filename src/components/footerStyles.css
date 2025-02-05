@@ -1,0 +1,79 @@
+.main-footer {
+  position: relative;
+  padding: 6rem 0;  /* increased padding */
+  min-height: 300px;  /* added minimum height */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)),  /* darker overlay */
+    url('https://images.unsplash.com/photo-1638208462418-f1dbac734b67?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+  background-size: cover;
+  background-position: center;
+  color: white;
+}
+
+/* Add gradient border at the top */
+.main-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #9b4dca, #ffd700);
+}
+
+.footer-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-left h2 {
+  margin: 0 0 1.5rem 0;
+  font-size: 5rem; 
+  font-weight: 600;
+}
+
+.creators {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.5rem;  
+}
+
+.creator-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.creator-links a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: white;
+  text-decoration: none;
+}
+
+.creator-links img {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
+.github-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  color: white;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.github-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}

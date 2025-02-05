@@ -7,6 +7,7 @@ import CubeSlider from '../components/CubeSlider';
 import Newsfeed from '../components/Newsfeed';
 import Card from "../components/card-hover-effect";
 import AbstractVectors from '../components/AbstractVectors';
+import Footer from '../components/Footer';
 
 const FadeInWhenVisible = ({ children }) => {
   const ref = React.useRef(null);
@@ -294,6 +295,7 @@ const Homepage = ({ onMapClick, onQuizClick, onFeedbackClick }) => {
           <CubeSlider />
         </FadeInWhenVisible>
       </article>
+      <Footer />
     </div>
   );
 };
