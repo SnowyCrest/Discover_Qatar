@@ -195,7 +195,7 @@ const Homepage = ({ onMapClick, onQuizClick, onFeedbackClick }) => {
         <FadeInWhenVisible>
           <div style={{ 
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(450px, 1fr))', // Changed from 300px to 450px
             gap: '2rem',
             padding: '2rem',
             maxWidth: '1400px',
@@ -230,7 +230,7 @@ const Homepage = ({ onMapClick, onQuizClick, onFeedbackClick }) => {
         <FadeInWhenVisible>
           <div style={{ 
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(450px, 1fr))', // Changed from 300px to 450px
             gap: '2rem',
             padding: '2rem',
             maxWidth: '1400px',
