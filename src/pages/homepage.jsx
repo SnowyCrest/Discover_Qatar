@@ -150,8 +150,7 @@ const Homepage = ({ onMapClick, onQuizClick, onFeedbackClick }) => {
             <a className="button" href="#" onClick={e => {
               e.preventDefault();
               onFeedbackClick();
-            }}>Feedback</a>
-            <a className="button" href="#">Sources</a>
+            }}>Reviews</a>
           </div>
         </header>
         <header className="hero-header">
