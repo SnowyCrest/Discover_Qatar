@@ -1,0 +1,21 @@
+.location-info .map-link {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.location-info .google-maps-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: #969696 !important;
+  text-decoration: none !important;
+  transition: all 0.2s ease;
+}
+
+.location-info .google-maps-link:hover {
+  background-color: #f5f5f5;
+}

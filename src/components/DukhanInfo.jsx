@@ -1,6 +1,7 @@
 import React from 'react';
 import ImageSlider from './ImageSlider';
 import { IoArrowBack } from 'react-icons/io5';
+import { FaGoogle } from 'react-icons/fa';
 
 const DukhanImages = [
   {
@@ -41,6 +42,16 @@ const DukhanInfo = ({ isVisible, onClose }) => {
       <p>Drilled in 1939, this is where Qatar first struck oil. Development continued after World War II and in 1949, the first crude exports occurred.</p>
       <p>86 years later, the field is still up and running. It now spans 70 kilometres across several oil reserves and outputs approx. 331,000 barrels every day.</p>
       <ImageSlider images={DukhanImages} />
+      <div className="map-link">
+        <a 
+          href="https://www.google.com/maps?q=dukhan+oil+field+qatar"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="google-maps-link"
+        >
+          <FaGoogle /> View on Google Maps
+        </a>
+      </div>
     </div>
   );
 };

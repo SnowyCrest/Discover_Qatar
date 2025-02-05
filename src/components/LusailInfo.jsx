@@ -1,6 +1,7 @@
 import React from 'react';
 import ImageSlider from './ImageSlider';
 import { IoArrowBack } from 'react-icons/io5';
+import { FaGoogle } from 'react-icons/fa';
 
 const LusailImages = [
   {
@@ -37,6 +38,16 @@ const LusailInfo = ({ isVisible, onClose }) => {
         Lusail City itself is designed to be a smart and sustainable city, incorporating advanced technology and green spaces to create a high-quality living environment. Visitors can enjoy a range of activities, from water sports and boat tours to shopping and entertainment at nearby attractions like the Lusail Iconic Stadium and the Place Vendôme Mall.
       </p>
       <ImageSlider images={LusailImages} />
+      <div className="map-link">
+        <a 
+          href="https://www.google.com/maps?q=lusail+marina+qatar"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="google-maps-link"
+        >
+          <FaGoogle /> View on Google Maps
+        </a>
+      </div>
     </div>
   );
 };

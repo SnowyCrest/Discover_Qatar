@@ -1,6 +1,7 @@
 import React from 'react';
 import ImageSlider from './ImageSlider';
 import { IoArrowBack } from 'react-icons/io5';
+import { FaGoogle } from 'react-icons/fa';
 
 const KharsaahImages = [
   {
@@ -29,6 +30,16 @@ const KharsaahInfo = ({ isVisible, onClose }) => {
       <p>Al Kharsaah Solar Power Plant is Qatar's first large-scale solar power plant, contributing to the country's renewable energy goals. It now supplies 10% of Qatar's power grid.</p>
       
       <ImageSlider images={KharsaahImages} />
+      <div className="map-link">
+        <a 
+          href="https://www.google.com/maps?q=al+kharsaah+solar+power+plant+qatar"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="google-maps-link"
+        >
+          <FaGoogle /> View on Google Maps
+        </a>
+      </div>
     </div>
   );
 };

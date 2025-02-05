@@ -1,6 +1,7 @@
 import React from 'react';
 import ImageSlider from './ImageSlider';
 import { IoArrowBack } from 'react-icons/io5';
+import { FaGoogle } from 'react-icons/fa';
 
 const KataraImages = [
   {
@@ -40,6 +41,16 @@ const KataraInfo = ({ isVisible, onClose }) => {
       </div>
       <p>Katara Cultural Village is a hub for cultural and artistic activities in Qatar, featuring theaters, galleries, and performance venues. This vibrant cultural destination is designed to celebrate the heritage and traditions of Qatar while fostering a spirit of creativity and innovation. From the stunning amphitheater to the beautiful blue mosque, Katara offers a diverse range of attractions and experiences for visitors of all ages.</p>
       <ImageSlider images={KataraImages} />
+      <div className="map-link">
+        <a 
+          href="https://www.google.com/maps?q=katara+cultural+village"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="google-maps-link"
+        >
+          <FaGoogle /> View on Google Maps
+        </a>
+      </div>
     </div>
   );
 };

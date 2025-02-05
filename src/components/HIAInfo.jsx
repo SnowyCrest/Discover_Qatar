@@ -1,6 +1,7 @@
 import React from 'react';
 import ImageSlider from './ImageSlider';
 import { IoArrowBack } from 'react-icons/io5';
+import { FaGoogle } from 'react-icons/fa';
 import HIALogo from '../assets/HIALogo.png';
 
 const HIAImages = [
@@ -40,6 +41,16 @@ const HIAInfo = ({ isVisible, onClose }) => {
       </div>
       <p>Hamad International Airport is the primary international airport in Qatar, known for its luxurious amenities and world-class facilities. From its state-of-the-art terminal to its exquisite lounges, HIA offers a travel experience like no other. The airport is also home to a variety of art installations and an indoor park, making it a destination in its own right.</p>
       <ImageSlider images={HIAImages} />
+      <div className="map-link">
+        <a 
+          href="https://www.google.com/maps?q=hamad+international+airport"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="google-maps-link"
+        >
+          <FaGoogle /> View on Google Maps
+        </a>
+      </div>
     </div>
   );
 };

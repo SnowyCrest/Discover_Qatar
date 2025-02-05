@@ -2,6 +2,7 @@ import React from 'react';
 import ImageSlider from './ImageSlider';
 import { IoArrowBack } from 'react-icons/io5';
 import NMoQ_Logo from '../assets/NMoQ_logo.png';
+import { FaGoogle } from 'react-icons/fa';
 
 const NationalMuseumImages = [
   {
@@ -41,6 +42,16 @@ const NationalMuseumInfo = ({ isVisible, onClose }) => {
       <p>The National Museum of Qatar showcases the history and culture of Qatar through immersive exhibits and stunning architecture.</p>
       <p>Click on one of the images below to explore the museum.</p>
       <ImageSlider images={NationalMuseumImages} />
+      <div className="map-link">
+        <a 
+          href="https://www.google.com/maps?q=national+museum+of+qatar"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="google-maps-link"
+        >
+          <FaGoogle /> View on Google Maps
+        </a>
+      </div>
     </div>
   );
 };

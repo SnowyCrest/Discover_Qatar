@@ -1,6 +1,7 @@
 import React from 'react';
 import ImageSlider from './ImageSlider';
 import { IoArrowBack } from 'react-icons/io5';
+import { FaGoogle } from 'react-icons/fa';
 
 const ZubaraImages = [
   {
@@ -28,6 +29,16 @@ const ZubaraInfo = ({ isVisible, onClose }) => {
       </div>
       <p>Al Zubara Fort is a historic Qatari military fortress built in 1938 under the oversight of Sheikh Abdullah bin Jassim Al Thani. It is now a UNESCO World Heritage site.</p>
       <ImageSlider images={ZubaraImages} />
+      <div className="map-link">
+        <a 
+          href="https://www.google.com/maps?q=al+zubara+fort+qatar"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="google-maps-link"
+        >
+          <FaGoogle /> View on Google Maps
+        </a>
+      </div>
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import React from 'react';
 import ImageSlider from './ImageSlider';
 import { IoArrowBack } from 'react-icons/io5';
+import { FaGoogle } from 'react-icons/fa';
 
 const souqWaqifImages = [
   {
@@ -36,6 +37,16 @@ const SouqWaqifInfo = ({ isVisible, onClose }) => {
       </div>
       <p>Souq Waqif is a vibrant traditional market that serves as the social heart of Doha. This bustling marketplace offers a glimpse into Qatar's rich cultural heritage through its architecture, crafts, and lively atmosphere. Here, you can find everything from spices and textiles to traditional garments and souvenirs. The souq is also home to numerous cafes and restaurants where you can enjoy delicious local cuisine.</p>
       <ImageSlider images={souqWaqifImages} />
+      <div className="map-link">
+        <a 
+          href="https://www.google.com/maps?q=souq+waqif+doha"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="google-maps-link"
+        >
+          <FaGoogle /> View on Google Maps
+        </a>
+      </div>
     </div>
   );
 };

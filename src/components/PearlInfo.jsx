@@ -1,6 +1,7 @@
 import React from 'react';
 import ImageSlider from './ImageSlider';
 import { IoArrowBack } from 'react-icons/io5';
+import { FaGoogle } from 'react-icons/fa';
 
 const PearlImages = [
   {
@@ -36,6 +37,16 @@ const PearlInfo = ({ isVisible, onClose }) => {
       </div>
       <p>The Pearl-Qatar is a man-made island featuring luxury residences, shopping, dining, and entertainment options. This upscale development is known for its stunning architecture, beautiful marinas, and vibrant community. Whether you're looking to shop at high-end boutiques, dine at gourmet restaurants, or simply enjoy a leisurely stroll along the waterfront, The Pearl-Qatar has it all.</p>
       <ImageSlider images={PearlImages} />
+      <div className="map-link">
+        <a 
+          href="https://www.google.com/maps?q=the+pearl+qatar"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="google-maps-link"
+        >
+          <FaGoogle /> View on Google Maps
+        </a>
+      </div>
     </div>
   );
 };

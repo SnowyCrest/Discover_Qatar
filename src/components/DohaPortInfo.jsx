@@ -1,6 +1,7 @@
 import React from 'react';
 import ImageSlider from './ImageSlider';
 import { IoArrowBack } from 'react-icons/io5';
+import { FaGoogle } from 'react-icons/fa';
 
 const DohaPortImages = [
   {
@@ -36,6 +37,16 @@ const DohaPortInfo = ({ isVisible, onClose }) => {
       </div>
       <p>The Port of Doha is a major seaport in Qatar, serving as a key hub for maritime trade and cruise tourism. This bustling port is not only a gateway for goods and passengers but also a vibrant area with cafes, shops, and a fish market. The port's unique blend of modern facilities and traditional charm makes it a fascinating place to visit.</p>
       <ImageSlider images={DohaPortImages} />
+      <div className="map-link">
+        <a 
+          href="https://www.google.com/maps?q=doha+port+qatar"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="google-maps-link"
+        >
+          <FaGoogle /> View on Google Maps
+        </a>
+      </div>
     </div>
   );
 };

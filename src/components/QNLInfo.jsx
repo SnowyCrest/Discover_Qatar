@@ -2,6 +2,7 @@ import React from 'react';
 import ImageSlider from './ImageSlider';
 import { IoArrowBack } from 'react-icons/io5';
 import QNLLogo from '../assets/QNLLogo.png';
+import { FaGoogle } from 'react-icons/fa';
 
 const QNLImages = [
   {
@@ -36,6 +37,16 @@ const QNLInfo = ({ isVisible, onClose }) => {
       </div>
       <p>Qatar National Library (QNL) is a state-of-the-art facility that serves as a center for learning, research, and culture. The library offers a vast collection of books, digital resources, and special collections, making it a hub for knowledge and innovation in Qatar.</p>
       <ImageSlider images={QNLImages} />
+      <div className="map-link">
+        <a 
+          href="https://www.google.com/maps?q=qatar+national+library"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="google-maps-link"
+        >
+          <FaGoogle /> View on Google Maps
+        </a>
+      </div>
     </div>
   );
 };

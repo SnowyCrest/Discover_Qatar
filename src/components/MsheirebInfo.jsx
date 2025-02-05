@@ -1,6 +1,7 @@
 import React from 'react';
 import ImageSlider from './ImageSlider';
 import { IoArrowBack } from 'react-icons/io5';
+import { FaGoogle } from 'react-icons/fa';
 
 const MsheirebImages = [
   {
@@ -32,6 +33,16 @@ const MsheirebInfo = ({ isVisible, onClose }) => {
       </div>
       <p>Msheireb Downtown Doha is the world's first sustainable downtown regeneration project, reviving the old commercial district with a new architectural language that is modern, yet inspired by traditional Qatari heritage. This innovative project blends the past and the future, creating a vibrant urban space that is both environmentally friendly and culturally significant.</p>
       <ImageSlider images={MsheirebImages} />
+      <div className="map-link">
+        <a 
+          href="https://www.google.com/maps?q=msheireb+downtown+doha"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="google-maps-link"
+        >
+          <FaGoogle /> View on Google Maps
+        </a>
+      </div>
     </div>
   );
 };
