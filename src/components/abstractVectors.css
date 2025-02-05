@@ -1,0 +1,71 @@
+.abstract-vectors {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.vector {
+  position: absolute;
+  opacity: 0.1;
+}
+
+.vector-1 {
+  top: 20%;
+  left: -10%;
+  width: 50%;
+  height: 600px;
+  background: linear-gradient(45deg, #8A1538 0%, #FFD700 100%);
+  transform: rotate(-35deg);
+  clip-path: path('M 0,100 C 150,0 350,0 500,100 L 500,500 C 350,400 150,400 0,500 L 0,100');
+  animation: floatAnimation 20s infinite alternate ease-in-out;
+}
+
+.vector-2 {
+  top: 40%;
+  right: -10%;
+  width: 45%;
+  height: 500px;
+  background: linear-gradient(-45deg, #FFB700 0%, #8A1538 100%);
+  transform: rotate(25deg);
+  clip-path: path('M 0,0 C 150,100 350,100 500,0 L 500,400 C 350,300 150,300 0,400 L 0,0');
+  animation: floatAnimation 25s infinite alternate-reverse ease-in-out;
+}
+
+.vector-3 {
+  bottom: -20%;
+  left: 20%;
+  width: 40%;
+  height: 400px;
+  background: linear-gradient(135deg, #8A1538 0%, #FFDB58 100%);
+  transform: rotate(-15deg);
+  clip-path: path('M 0,200 C 100,100 400,100 500,200 L 500,400 C 400,300 100,300 0,400 L 0,200');
+  animation: floatAnimation 22s infinite alternate ease-in-out;
+}
+
+.vector-4 {
+  top: 10%;
+  right: 25%;
+  width: 35%;
+  height: 300px;
+  background: linear-gradient(-135deg, #FFD700 0%, #8A1538 100%);
+  transform: rotate(45deg);
+  clip-path: path('M 0,50 C 200,150 300,150 500,50 L 500,250 C 300,350 200,350 0,250 L 0,50');
+  animation: floatAnimation 28s infinite alternate-reverse ease-in-out;
+}
+
+@keyframes floatAnimation {
+  0% {
+    transform: translate(0, 0) rotate(var(--rotation, 0deg));
+  }
+  100% {
+    transform: translate(var(--translate-x, 50px), var(--translate-y, 30px)) rotate(var(--rotation-end, 5deg));
+  }
+}
+
+.vector-1 { --rotation: -35deg; --rotation-end: -40deg; --translate-x: 30px; --translate-y: 20px; }
+.vector-2 { --rotation: 25deg; --rotation-end: 30deg; --translate-x: -40px; --translate-y: -25px; }
+.vector-3 { --rotation: -15deg; --rotation-end: -20deg; --translate-x: 25px; --translate-y: -30px; }
+.vector-4 { --rotation: 45deg; --rotation-end: 50deg; --translate-x: -30px; --translate-y: 35px; }

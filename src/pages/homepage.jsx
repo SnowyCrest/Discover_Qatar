@@ -6,6 +6,7 @@ import '../../src/index.css';
 import CubeSlider from '../components/CubeSlider';
 import Newsfeed from '../components/Newsfeed';
 import Card from "../components/card-hover-effect";
+import AbstractVectors from '../components/AbstractVectors';
 
 const FadeInWhenVisible = ({ children }) => {
   const ref = React.useRef(null);
@@ -140,6 +141,7 @@ const Homepage = ({ onMapClick, onQuizClick, onFeedbackClick }) => {
 
   return (
     <div className="page-container">
+      <AbstractVectors />
       <section className="hero">
         <header id="header">
           <a id="logo" href="#">An&Aa</a>
