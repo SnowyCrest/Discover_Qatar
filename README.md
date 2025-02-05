@@ -1,4 +1,4 @@
-![Frame 9](https://github.com/user-attachments/assets/7f79a26c-cf70-4c8c-8aaa-43cf1d422c29)
+![Frame 9](https://github.com/user-attachments/assets/b6a644b4-8ba5-42c8-ac04-8ad925eec30c)
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/SnowyCrest/Discover_Qatar) 
 ![Website](https://img.shields.io/website?url=https%3A%2F%2Fdiscover-qatar.vercel.app/)
