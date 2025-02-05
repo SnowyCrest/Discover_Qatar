@@ -5,7 +5,7 @@ const AbstractVectors = () => {
   return (
     <>
       <div className="pattern-container">
-        <img src="/src/assets/bg_pattern.png" alt="Cannot load pattern" className="bg-pattern" />
+        <img src="/bg_pattern.png" alt="Cannot load pattern" className="bg-pattern" />
       </div>
       <div className="corner-decorations">
         <div className="corner top-left"></div>
