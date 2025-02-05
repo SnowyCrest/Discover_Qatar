@@ -142,7 +142,6 @@ const Homepage = ({ onMapClick, onQuizClick, onFeedbackClick }) => {
 
   return (
     <div className="page-container">
-      <AbstractVectors />
       <section className="hero">
         <header id="header">
           <a id="logo" href="#">An&Aa</a>
@@ -182,6 +181,7 @@ const Homepage = ({ onMapClick, onQuizClick, onFeedbackClick }) => {
           }} href="#">Take the quiz</a>
         </footer>
       </section>
+      <AbstractVectors />
       <article>
         <FadeInWhenVisible>
           <h1 style={{ 

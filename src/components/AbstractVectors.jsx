@@ -3,12 +3,15 @@ import './abstractVectors.css';
 
 const AbstractVectors = () => {
   return (
-    <div className="abstract-vectors">
-      <div className="vector vector-1"></div>
-      <div className="vector vector-2"></div>
-      <div className="vector vector-3"></div>
-      <div className="vector vector-4"></div>
-    </div>
+    <>
+      <div className="pattern-container">
+        <img src="/src/assets/bg_pattern.svg" alt="Background pattern" className="bg-pattern" />
+      </div>
+      <div className="corner-decorations">
+        <div className="corner top-left"></div>
+        <div className="corner top-right"></div>
+      </div>
+    </>
   );
 };
 

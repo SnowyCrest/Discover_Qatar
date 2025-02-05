@@ -69,3 +69,105 @@
 .vector-2 { --rotation: 25deg; --rotation-end: 30deg; --translate-x: -40px; --translate-y: -25px; }
 .vector-3 { --rotation: -15deg; --rotation-end: -20deg; --translate-x: 25px; --translate-y: -30px; }
 .vector-4 { --rotation: 45deg; --rotation-end: 50deg; --translate-x: -30px; --translate-y: 35px; }
+
+.pattern-container {
+    width: 100%;
+    height: 2000px;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+    top: 100vh;
+}
+
+.bg-pattern {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.3;
+    transform: scaleY(1);
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.corner-decorations {
+  position: absolute;
+  top: 100vh;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.corner {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+  .corner {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+.corner::before,
+.corner::after {
+  content: '';
+  position: absolute;
+  background: #8A1538;
+}
+
+.corner::before {
+  width: 25px; 
+  height: 25px; 
+  border-radius: 50%;
+}
+
+.corner::after {
+  width: 80px;  
+  height: 3px; 
+  background: linear-gradient(90deg, #8A1538, #FFD700);
+}
+
+.top-left {
+  top: 30px;  
+  left: 30px; 
+  border-top: 3px solid #8A1538;   
+  border-left: 3px solid #8A1538;  
+}
+
+.top-left::before {
+  top: -12.5px;  
+  left: -12.5px; 
+}
+
+.top-left::after {
+  transform: rotate(45deg);
+  top: 40px;    
+  left: 10px;   
+}
+
+.top-right {
+  top: 30px;    
+  right: 30px;  
+  border-top: 3px solid #FFD700;    
+  border-right: 3px solid #FFD700;  
+}
+
+.top-right::before {
+  top: -12.5px;   
+  right: -12.5px; 
+  background: #FFD700;
+}
+
+.top-right::after {
+  transform: rotate(-45deg);
+  top: 40px;     
+  right: 10px;   
+}
+
+
