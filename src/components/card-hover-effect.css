@@ -1,75 +1,78 @@
+:root {
+  --card-border-radius: 15px;
+  --card-shadow: 0 1px 5px #00000099;
+  --card-hover-shadow: 0 5px 20px 5px #00000044;
+  --card-transition: 300ms ease-out;
+}
+
 .card {
-  font-weight: bold;
-  text-align: center;
-  color: #181a1a;
-  border-radius: 15px;
-  box-shadow: 0 1px 5px #00000099;
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  border-radius: var(--card-border-radius);
+  box-shadow: var(--card-shadow);
   background-size: cover;
   background-position: center;
-  position: relative;
-  transition-duration: 300ms;
-  transition-property: transform, box-shadow;
-  transition-timing-function: ease-out;
-  transform: rotate3d(0);
+  transition: transform var(--card-transition), box-shadow var(--card-transition);
   width: 100%;
   height: 100%;
-  min-height: 400px;
   overflow: hidden;
 }
 
 .card.landscape {
   aspect-ratio: 16/9;
-  min-height: 300px;
+  min-height: min(400px, 50vh);
 }
 
 .card.portrait {
   aspect-ratio: 3/4;
-  min-height: 400px;
+  min-height: min(500px, 60vh);
 }
 
 .card:hover {
   transition-duration: 150ms;
-  box-shadow: 0 5px 20px 5px #00000044;
+  box-shadow: var(--card-hover-shadow);
 }
 
 .card .glow {
   position: absolute;
-  width: 100%;
-  height: 100%;
-  left: 0;
-  top: 0;
+  inset: 0;
   background-image: radial-gradient(circle at 50% -20%, #ffffff22, #0000000f);
-  pointer-events: none; /* Prevent the glow from blocking interactions */
+  pointer-events: none;
+}
+
+@media (max-width: 1200px) {
+  .card.landscape {
+    aspect-ratio: 16/9;
+    min-height: min(350px, 45vh);
+  }
+  
+  .card.portrait {
+    aspect-ratio: 3/4;
+    min-height: min(450px, 55vh);
+  }
 }
 
 @media (max-width: 768px) {
-  .card {
-    min-height: 300px;
-  }
-
   .card.landscape {
     aspect-ratio: 4/3;
-    min-height: 250px;
+    min-height: min(300px, 40vh);
   }
-
+  
   .card.portrait {
     aspect-ratio: 2/3;
-    min-height: 350px;
+    min-height: min(400px, 50vh);
   }
 }
 
 @media (max-width: 480px) {
-  .card {
-    min-height: 250px;
-  }
-
   .card.landscape {
     aspect-ratio: 1/1;
-    min-height: 200px;
+    min-height: min(250px, 35vh);
   }
-
+  
   .card.portrait {
     aspect-ratio: 3/4;
-    min-height: 300px;
+    min-height: min(350px, 45vh);
   }
 }

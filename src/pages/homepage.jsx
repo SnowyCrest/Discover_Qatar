@@ -195,18 +195,19 @@ const Homepage = ({ onMapClick, onQuizClick, onFeedbackClick }) => {
         <FadeInWhenVisible>
           <div style={{ 
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(450px, 1fr))',
-            gap: '2rem',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            gap: '3rem',
             padding: '2rem',
             maxWidth: '1400px',
             margin: '0 auto',
-            alignItems: 'stretch'
+            alignItems: 'start' // changed from stretch
           }}>
             <div style={{ 
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',
-              gap: '1rem'
+              gap: '1rem',
+              minHeight: '300px' // added minimum height
             }}>
               <p style={{ 
                 color: '#575654',
@@ -221,6 +222,8 @@ const Homepage = ({ onMapClick, onQuizClick, onFeedbackClick }) => {
             <div style={{ 
               aspectRatio: '4/3',
               minHeight: '300px',
+              height: '100%', // added to maintain consistent height
+              position: 'relative' // added for better positioning
             }}>
               <Card imageUrl="https://visitqatar.com/adobe/dynamicmedia/deliver/dm-aid--7744fe20-d8e3-4a80-9747-94f114a98834/pearl-min-1.jpg?width=1920&preferwebp=true" />
             </div>
@@ -230,16 +233,18 @@ const Homepage = ({ onMapClick, onQuizClick, onFeedbackClick }) => {
         <FadeInWhenVisible>
           <div style={{ 
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(450px, 1fr))',
-            gap: '2rem',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', // reduced from 450px
+            gap: '3rem',
             padding: '2rem',
             maxWidth: '1400px',
             margin: '0 auto',
-            alignItems: 'stretch'
+            alignItems: 'start' // changed from stretch
           }}>
             <div style={{ 
               aspectRatio: '4/3',
               minHeight: '300px',
+              height: '100%', // added to maintain consistent height
+              position: 'relative' // added for better positioning
             }}>
               <Card imageUrl="https://visitqatar.com/adobe/dynamicmedia/deliver/dm-aid--edf9012a-8ec5-48ed-b5de-b0f754d1fd90/souq-waqif-al-wakrah-13.jpg?preferwebp=true&quality=75" />
             </div>
@@ -248,7 +253,8 @@ const Homepage = ({ onMapClick, onQuizClick, onFeedbackClick }) => {
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',
-              gap: '1rem'
+              gap: '1rem',
+              minHeight: '300px' // added minimum height
             }}>
               <p style={{ 
                 color: '#575654',

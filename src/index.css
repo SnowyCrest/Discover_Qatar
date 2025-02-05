@@ -178,7 +178,7 @@ body {
 }
 
 article {
-  max-width: 64em;
+  max-width: 100%;  /* Changed from 64em */
   color: #ffffff;
   margin: 2rem auto;
   padding: 1em;
@@ -1785,4 +1785,73 @@ select {
 
 .hero-temperature svg {
   font-size: 1.8em; 
+}
+
+div[style*="display: grid"] {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 6rem; 
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  align-items: start;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+}
+
+div[style*="aspectRatio: '4/3'"] {
+  width: 100%; 
+  aspect-ratio: 4/3;
+  min-height: 350px;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 3rem;
+  flex-shrink: 0;
+  max-height: 600px;
+}
+
+div[style*="display: flex"][style*="flexDirection: column"] {
+  width: 100%; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3rem; 
+  height: auto; 
+  min-height: 350px;
+  padding: 2rem 0; 
+  flex: 1;
+  overflow: hidden;
+}
+
+@media (max-width: 960px) {
+  div[style*="display: grid"] {
+    grid-template-columns: 1fr; 
+    gap: 4rem; 
+    padding: 1rem;
+  }
+  
+  div[style*="aspectRatio: '4/3'"] {
+    min-height: 300px;
+    max-height: 450px;
+    margin-bottom: 2rem; 
+  }
+  
+  div[style*="display: flex"][style*="flexDirection: column"] {
+    min-height: auto;
+    gap: 2rem;
+    padding: 1.5rem 0; 
+  }
+}
+
+@media (max-width: 480px) {
+  div[style*="display: grid"] {
+    gap: 2rem; 
+  }
+  
+  div[style*="aspectRatio: '4/3'"] {
+    min-height: 250px;
+    max-height: 350px;
+  }
 }
