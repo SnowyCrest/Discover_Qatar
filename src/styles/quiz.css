@@ -1,4 +1,4 @@
-/* Add root container styles */
+/* root container styles */
 #root {
   display: flex;
   justify-content: center;
@@ -6,7 +6,7 @@
   min-height: 100vh;
 }
 
-/* Update quiz container styles */
+/* quiz container styles */
 .quiz-container {
   width: 100vw;
   min-height: 100vh;
@@ -17,7 +17,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; /* Center content vertically */
+  justify-content: center; 
 }
 
 .quiz-content {
@@ -26,13 +26,16 @@
   margin: 0 auto;
 }
 
-/* Update quiz component styles */
+/* quiz component styles */
 .quiz {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  padding-bottom: 100px; 
+  position: relative;
+  min-height: 100vh;
 }
 .quiz.fade-in{
   overflow: auto;
@@ -79,7 +82,7 @@
   background-color: #fc3939;
 }
 
-/* Center start and end screens */
+/*start and end screens */
 .start-screen,
 .end-screen {
   width: 100%;
@@ -87,6 +90,37 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
+}
+
+/*button container positioning */
+.button-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0);
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+}
+
+/* explanation styling */
+.explanation {
+  margin-bottom: 120px; 
+  padding: 20px;
+  background: rgba(255, 255, 255, 0);
+  border-radius: 10px;
+  max-width: 800px;
+  width: 90%;
+  text-align: center;
+  color: #fff; 
+}
+
+.explanation-fade-in p {
+  color: #fff; 
 }
 
 @media (max-width: 768px) {
@@ -102,29 +136,17 @@
   }
 
   .quiz {
-    padding: 25px 25px 100px 25px;
-    margin: 20px;
-    min-height: auto;
-    padding-bottom: 100px;
-  }
-
-  .explanation {
-    margin-bottom: 60px;
-  }
-
-  .button-container {
-    padding: 15px 20px;
+    padding: 20px 20px 120px 20px; 
   }
 
   .button-container {
     flex-direction: column;
-    left: 20px;
-    right: 20px;
-    bottom: 20px;
+    padding: 15px;
   }
 
-  .btn {
-    max-width: 100%;
+  .button-container .btn {
+    width: 100%;
+    margin: 5px 0;
   }
 
   .heading {
@@ -142,6 +164,6 @@
   }
 
   .explanation {
-    margin-bottom: 80px;
+    margin-bottom: 140px;
   }
 }

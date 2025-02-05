@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import '../index.css';
 import '../styles/quiz.css';
 
-// Add background images configuration
+// bg img config
 const backgroundImages = {
   default: 'https://medomed.org/wp-content/uploads/2017/06/al-zubarah-qatar-e1505205651158.jpg',
   history: 'https://newindoha.com/wp-content/uploads/2024/02/20231218_144355-1050x591.jpg',
@@ -12,6 +12,7 @@ const backgroundImages = {
   'time-periods': 'https://www.nedapidentification.com/wp-content/uploads/2023/01/Msheireb-Downtown-Doha-scaled-1.jpg'
 };
 
+// MASSIVE array
 const qatarQuestions = {
   history: [
     {
@@ -548,8 +549,8 @@ const Quiz = ({ onBackClick }) => {
       width: '100vw',
       display: 'flex',
       flexDirection: 'column',
-      justifyContent: 'center', // Center content vertically
-      alignItems: 'center' // Center content horizontally
+      justifyContent: 'center', 
+      alignItems: 'center' 
     }}>
         <nav className="map-nav">
           <a href="#" onClick={handleBack} className="back-button">← Back to Home</a>

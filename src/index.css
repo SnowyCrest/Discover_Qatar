@@ -1045,7 +1045,7 @@ img.centered-img {
 
 .timer .progress .progress-bar {
   height: 100%;
-  background: linear-gradient(to right, #ea517c, #b478f1);
+  background: linear-gradient(to right, #b478f1, #f1d178);
   transition: 1s linear;
 }
 .quiz {
