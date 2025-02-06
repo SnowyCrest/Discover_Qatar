@@ -233,17 +233,17 @@ const Homepage = ({ onMapClick, onQuizClick, onFeedbackClick }) => {
         <FadeInWhenVisible>
           <div style={{ 
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', // reduced from 450px
-            gap: '3rem',
-            padding: '0.5rem',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
+            gap: '2rem',
+            padding: '-0.5rem',
             maxWidth: '1400px',
             margin: '0 auto',
             alignItems: 'start' // changed from stretch
           }}>
             <div style={{ 
               aspectRatio: '4/3',
-              minHeight: '300px',
-              height: '100%', // added to maintain consistent height
+              minHeight: '400px',
+              height: '80%', // added to maintain consistent height
               position: 'relative' // added for better positioning
             }}>
               <Card imageUrl="https://visitqatar.com/adobe/dynamicmedia/deliver/dm-aid--edf9012a-8ec5-48ed-b5de-b0f754d1fd90/souq-waqif-al-wakrah-13.jpg?preferwebp=true&quality=75" />
