@@ -80,8 +80,10 @@ const RatingCard = ({
           <input id="file-upload" type="file" accept="image/*" multiple onChange={onImageUpload} />
         </div>
         {images.length > 0 && (
-          <div className="image-preview-container">
-            <img src={images[0] || "/placeholder.svg"} alt="Preview" className="image-preview" />
+          <div className="image-preview">
+            {images.map((image, index) => (
+              <img key={index} src={image} alt={`Preview ${index + 1}`} />
+            ))}
           </div>
         )}
         <button className="rating-card__btn" onClick={onSubmit} disabled={feedbackScore === 0}>
