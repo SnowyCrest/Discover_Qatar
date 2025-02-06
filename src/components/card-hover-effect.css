@@ -44,19 +44,19 @@
 @media (max-width: 1200px) {
   .card.landscape {
     aspect-ratio: 16/9;
-    min-height: min(350px, 45vh);
+    min-height: min(300px, 45vh);
   }
   
   .card.portrait {
     aspect-ratio: 3/4;
-    min-height: min(450px, 55vh);
+    min-height: min(400px, 55vh);
   }
 }
 
 @media (max-width: 768px) {
   .card.landscape {
-    aspect-ratio: 4/3;
-    min-height: min(300px, 40vh);
+    aspect-ratio: 16/9;
+    min-height: min(300px, 45vh);
   }
   
   .card.portrait {

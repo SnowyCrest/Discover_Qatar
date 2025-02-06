@@ -235,7 +235,7 @@ const Homepage = ({ onMapClick, onQuizClick, onFeedbackClick }) => {
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', // reduced from 450px
             gap: '3rem',
-            padding: '2rem',
+            padding: '0.5rem',
             maxWidth: '1400px',
             margin: '0 auto',
             alignItems: 'start' // changed from stretch
