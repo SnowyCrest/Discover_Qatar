@@ -4,7 +4,7 @@
 ![Website](https://img.shields.io/website?url=https%3A%2F%2Fdiscover-qatar.vercel.app/)
 
 # 🧭 Discover Qatar
-Tourism & Travel website built with React JSX and Vite. Submission for the "Timeless Qatar" coding competition.
+A Travel & Tourism website built with React JSX and Vite. Submission for the "Timeless Qatar" coding competition.
 Built by Anas Timeridjine (SnowyCrest) and Ashish Dhakal (found-sec).
 
 ## ✨ Website Features
